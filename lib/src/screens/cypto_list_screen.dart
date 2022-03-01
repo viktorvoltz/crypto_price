@@ -27,6 +27,9 @@ class _CryptoListState extends State<CryptoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Crypto price List"),
+      ),
       body: StreamBuilder(
         stream: bloc.coinDataStream,
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
@@ -48,18 +51,25 @@ class _CryptoListState extends State<CryptoList> {
         itemCount: snapshot.data?.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             leading: SizedBox(
-              height: 50,
+              height: 40,
               child: Image.network(snapshot.data![index].image.toString()),
             ),
-            title: Text(snapshot.data![index].name.toString()),
+            title: Text(
+              snapshot.data![index].name.toString(),
+              style: GoogleFonts.titilliumWeb(fontSize: 25),
+            ),
+            subtitle: Text('\$' + snapshot.data![index].currentPrice.toString()),
             trailing: Text(
               snapshot.data![index].priceChange24H.toString(),
               style: snapshot.data![index].priceChange24H
                       .toString()
                       .startsWith("-")
-                  ? GoogleFonts.titilliumWeb(fontWeight: FontWeight.w700, color: Colors.red)
-                  : GoogleFonts.titilliumWeb(fontWeight: FontWeight.w700, color: Colors.green),
+                  ? GoogleFonts.titilliumWeb(
+                      fontWeight: FontWeight.w700, color: Colors.red)
+                  : GoogleFonts.titilliumWeb(
+                      fontWeight: FontWeight.w700, color: Colors.green),
             ),
           );
         });
