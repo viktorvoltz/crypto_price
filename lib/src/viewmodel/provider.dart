@@ -21,7 +21,7 @@ class CoinGeckoProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  setPokemonData(CoinGecko coinData){
+  setCoinGeckoData(CoinGecko coinData){
     _coinData = coinData;
     notifyListeners();
   }
@@ -34,7 +34,7 @@ class CoinGeckoProvider extends ChangeNotifier{
     setLoading(true);
     var response = await CoinGeckoData.getData();
     if (response is Success){
-      setPokemonData(response.response as CoinGecko);
+      setCoinGeckoData(response.response as CoinGecko);
     }
     if (response is Failure){
       Failure error = Failure(

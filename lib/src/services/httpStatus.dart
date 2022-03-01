@@ -1,6 +1,8 @@
+import 'package:coingecko/src/model/coingeckoModel.dart';
+
 class Success{
   int? code;
-  Object? response;
+  List<CoinGecko>? response;
   
   Success({
     this.code,
