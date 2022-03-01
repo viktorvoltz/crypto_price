@@ -29,19 +29,27 @@ class _CryptoListState extends State<CryptoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Crypto price List"),
+        title: Text(
+          "Crypto price List",
+          style: GoogleFonts.titilliumWeb(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        actions: [
+          Text(DateTime.now().toString(),
+              style: GoogleFonts.titilliumWeb(color: Colors.black))
+        ],
       ),
       body: StreamBuilder(
-        stream: bloc.coinDataStream,
+        stream: bloc.coinDataStream.timeout(const Duration(seconds: 10)),
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
           if (snapshot.hasData) {
             return coinList(snapshot);
-          } else if (snapshot.data is Failure) {
-            Text(bloc.error!.response.toString());
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return Center(child: Text(bloc.error!.response.toString()));
         },
       ),
     );
@@ -52,7 +60,8 @@ class _CryptoListState extends State<CryptoList> {
         itemCount: snapshot.data?.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             leading: SizedBox(
               height: 40,
               child: Image.network(snapshot.data![index].image.toString()),
@@ -61,7 +70,8 @@ class _CryptoListState extends State<CryptoList> {
               snapshot.data![index].name.toString(),
               style: GoogleFonts.titilliumWeb(fontSize: 25),
             ),
-            subtitle: Text('\$' + snapshot.data![index].currentPrice.toString()),
+            subtitle:
+                Text('\$' + snapshot.data![index].currentPrice.toString()),
             trailing: Text(
               snapshot.data![index].priceChange24H.toString(),
               style: snapshot.data![index].priceChange24H
