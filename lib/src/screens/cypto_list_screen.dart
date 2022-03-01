@@ -1,5 +1,6 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/services/httpStatus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,8 +36,8 @@ class _CryptoListState extends State<CryptoList> {
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
           if (snapshot.hasData) {
             return coinList(snapshot);
-          } else if (snapshot.hasError) {
-            Text(snapshot.error.toString());
+          } else if (snapshot.data is Failure) {
+            Text(bloc.error!.response.toString());
           }
           return const Center(
             child: CircularProgressIndicator(),
