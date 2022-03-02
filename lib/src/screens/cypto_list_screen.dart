@@ -17,6 +17,7 @@ class CryptoList extends StatefulWidget {
 class _CryptoListState extends State<CryptoList> {
   @override
   void initState() {
+    bloc.getCoinData();
     super.initState();
   }
 
