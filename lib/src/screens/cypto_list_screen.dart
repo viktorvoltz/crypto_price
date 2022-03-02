@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
-import 'package:coingecko/src/services/httpStatus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -64,6 +61,28 @@ class _CryptoListState extends State<CryptoList> {
             child: CircularProgressIndicator(),
           );
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.graphic_eq),
+            label: 'price',
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'explore'
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.notification_important),
+            label: 'notification'
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'account'
+            )
+        ],
       ),
     );
   }
