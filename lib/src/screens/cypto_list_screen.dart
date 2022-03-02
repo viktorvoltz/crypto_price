@@ -40,16 +40,16 @@ class _CryptoListState extends State<CryptoList> {
         ],
       ),
       body: StreamBuilder(
-        stream: bloc.coinDataStream.timeout(const Duration(seconds: 10)),
+        stream: bloc.coinDataStream,
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
           if (snapshot.hasData) {
             return coinList(snapshot);
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+          } else if (snapshot.hasError) {
+            return Text(bloc.error!.response.toString());
           }
-          return Center(child: Text(bloc.error!.response.toString()));
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
