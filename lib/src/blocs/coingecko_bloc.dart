@@ -3,34 +3,29 @@ import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/services/httpStatus.dart';
 import 'package:rxdart/rxdart.dart';
 
-class CoingeckoBloc{
-
+class CoingeckoBloc {
   Failure? _error;
   Failure? get error => _error;
   final _coinDataFetcher = PublishSubject<List<CoinGecko>>();
 
   Stream<List<CoinGecko>> get coinDataStream => _coinDataFetcher.stream;
 
-  setError(Failure error){
+  setError(Failure error) {
     _error = error;
   }
 
   getCoinData() async {
     var response = await CoinGeckoData.getData();
-    if (response is Success){
+    if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
       _coinDataFetcher.sink.add(coinGecko);
-    }
-    if (response is Failure){
-      Failure error = Failure(
-        code: response.code,
-        response: response.response
-      );
+    } else if (response is Failure) {
+      Failure error = Failure(code: response.code, response: response.response);
       setError(error);
     }
   }
 
-  dispose(){
+  dispose() {
     _coinDataFetcher.close();
   }
 }
