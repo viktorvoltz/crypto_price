@@ -9,7 +9,7 @@ class CoinGeckoData {
     try {
       final response = await http.get(
         Uri.parse(API_KEY),
-      ).timeout(const Duration(seconds: 20));
+      );
       if (response.statusCode == 200) {
         return Success(response: coinGeckoFromJson(response.body));
       }

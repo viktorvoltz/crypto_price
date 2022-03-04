@@ -8,10 +8,17 @@ class CoingeckoBloc {
   Failure? get error => _error;
   final _coinDataFetcher = PublishSubject<List<CoinGecko>>();
 
+  List<CoinGecko> _coinList = [];
+  List<CoinGecko>? get coinList => _coinList;
+
   Stream<List<CoinGecko>> get coinDataStream => _coinDataFetcher.stream;
 
   setError(Failure error) {
     _error = error;
+  }
+
+  setCoinList(List<CoinGecko> coinList){
+    _coinList = coinList;
   }
 
   getCoinData() async {
@@ -19,6 +26,9 @@ class CoingeckoBloc {
     if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
       _coinDataFetcher.sink.add(coinGecko);
+      _coinList.add(coinGecko as CoinGecko);
+      
+      setCoinList(_coinList);
     } else if (response is Failure) {
       Failure error = Failure(code: response.code, response: response.response);
       setError(error);

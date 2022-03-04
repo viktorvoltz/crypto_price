@@ -24,7 +24,6 @@ class _CryptoListState extends State<CryptoList> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +45,12 @@ class _CryptoListState extends State<CryptoList> {
           ),
           const SizedBox(
             width: 10,
+          ),
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: CryptoSearch());
+            },
+            icon: const Icon(Icons.search, color: Colors.black),
           )
         ],
       ),
@@ -54,7 +59,7 @@ class _CryptoListState extends State<CryptoList> {
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
           if (snapshot.hasData) {
             return coinList(snapshot);
-          } else if (snapshot.hasError){
+          } else if (snapshot.hasError) {
             return Center(child: Text(bloc.error!.response.toString()));
           }
           return const Center(
@@ -69,19 +74,11 @@ class _CryptoListState extends State<CryptoList> {
           BottomNavigationBarItem(
             icon: Icon(Icons.graphic_eq),
             label: 'price',
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'explore'
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.notification_important),
-            label: 'notification'
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'account'
-            )
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'explore'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notification_important), label: 'notification'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'account')
         ],
       ),
     );
@@ -117,5 +114,57 @@ class _CryptoListState extends State<CryptoList> {
             ),
           );
         });
+  }
+}
+
+class CryptoSearch extends SearchDelegate<CoinGecko> {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {},
+      )
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.navigate_before),
+      onPressed: () {},
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Center(child: Text(query));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final itemList = query.isEmpty
+        ? bloc.coinList
+        : bloc.coinList!
+            .where((element) => element.name!.startsWith(query))
+            .toList();
+            return itemList!.isEmpty?const Center(child: Text("coin not found")):
+            ListView.builder(
+              itemCount: itemList.length,
+              itemBuilder: (context, index){
+                return Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: (){
+                          showResults(context);
+                        },
+                        title: Text(itemList[index].name!),
+                      )
+                    ],
+                  )
+                  );
+            });
   }
 }
