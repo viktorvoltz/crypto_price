@@ -26,8 +26,8 @@ class CoingeckoBloc {
     if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
       _coinDataFetcher.sink.add(coinGecko);
-      _coinList.add(coinGecko as CoinGecko);
-      
+      _coinList = [...coinGecko];
+      ///_coinList.add(coinGecko as CoinGecko);
       setCoinList(_coinList);
     } else if (response is Failure) {
       Failure error = Failure(code: response.code, response: response.response);

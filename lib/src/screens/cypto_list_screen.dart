@@ -1,5 +1,6 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -88,31 +89,7 @@ class _CryptoListState extends State<CryptoList> {
     return ListView.builder(
         itemCount: snapshot.data?.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            leading: SizedBox(
-              height: 40,
-              child: Image.network(snapshot.data![index].image.toString()),
-            ),
-            title: Text(
-              snapshot.data![index].name.toString(),
-              style: GoogleFonts.titilliumWeb(fontSize: 25),
-            ),
-            subtitle:
-                Text('\$' + snapshot.data![index].currentPrice.toString()),
-            trailing: Text(
-              snapshot.data![index].priceChange24H!.toStringAsFixed(3),
-              style: snapshot.data![index].priceChange24H
-                      .toString()
-                      .startsWith("-")
-                  ? GoogleFonts.titilliumWeb(
-                      fontWeight: FontWeight.w700, color: Colors.red)
-                  : GoogleFonts.titilliumWeb(
-                      fontWeight: FontWeight.w700,
-                      color: const Color.fromARGB(255, 3, 150, 8)),
-            ),
-          );
+          return CryptoPriceList(snapshot: snapshot, index: index,);
         });
   }
 }
