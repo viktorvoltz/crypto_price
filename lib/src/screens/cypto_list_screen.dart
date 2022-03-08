@@ -100,7 +100,9 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
     return [
       IconButton(
         icon: const Icon(Icons.clear),
-        onPressed: () {},
+        onPressed: () {
+          query = "";
+        },
       )
     ];
   }
@@ -109,7 +111,9 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.navigate_before),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+      },
     );
   }
 
@@ -123,7 +127,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
     final itemList = query.isEmpty
         ? bloc.coinList
         : bloc.coinList!
-            .where((element) => element.name!.startsWith(query))
+            .where((element) => element.name!.toLowerCase().startsWith(query.toLowerCase()))
             .toList();
             return itemList!.isEmpty?const Center(child: Text("coin not found")):
             ListView.builder(
