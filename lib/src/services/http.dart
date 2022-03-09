@@ -3,9 +3,16 @@ import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'httpStatus.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CoinGeckoData {
   static Future<Object> getData() async {
+
+    String coinFile = "coindata.json";
+    var dir = await getTemporaryDirectory();
+
+    File file =  File(dir.path+"/"+coinFile);
+
     try {
       final response = await http.get(
         Uri.parse(API_KEY),
