@@ -4,6 +4,8 @@ import 'package:coingecko/src/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'httpStatus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
+
 
 class CoinGeckoData {
   static Future<Object> getData() async {
@@ -13,14 +15,21 @@ class CoinGeckoData {
 
     File file =  File(dir.path+"/"+coinFile);
 
-    try {
+    if(file.existsSync()){
+      var jsonData = file.readAsStringSync();
+      Success res = Success(response: coinGeckoFromJson(jsonData));
+      print('loading from cache');
+      return res;
+    }else{
+      try {
       final response = await http.get(
         Uri.parse(API_KEY),
       );
       if (response.statusCode == 200) {
+        print('loading from API');
+        file.writeAsStringSync(response.body, flush: true, mode: FileMode.write);
         return Success(response: coinGeckoFromJson(response.body));
       }
-      return Failure(code: 100, response: 'Invalid Response');
     } on HttpException {
       return Failure(code: 101, response: 'No Internet');
     } on FormatException {
@@ -28,5 +37,7 @@ class CoinGeckoData {
     } catch (e) {
       return Failure(code: 103, response: 'Invalid Response');
     }
+    }
+    return Failure(code: 100, response: 'Invalid Response');
   }
 }
