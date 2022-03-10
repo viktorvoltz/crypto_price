@@ -4,7 +4,6 @@ import 'package:coingecko/src/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'httpStatus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:convert';
 
 class CoinGeckoData {
   static Future<Object> getData() async {
@@ -19,6 +18,9 @@ class CoinGeckoData {
         response: coinGeckoFromJson(jsonData),
       );
       print('loading from cache');
+      Future.delayed(const Duration(hours: 12), () async{
+        await file.delete();
+      });
       return res;
     } else {
       try {
