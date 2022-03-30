@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "449296951693",
+    "project_id": "coingeckosignin",
+    "storage_bucket": "coingeckosignin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449296951693:android:641cf9adbcde8c8a2a75c4",
+        "android_client_info": {
+          "package_name": "com.chinonso.coingecko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449296951693-qege6efqohaaonij6gfb44uo78geqg87.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chinonso.coingecko",
+            "certificate_hash": "330274a9053a2772404c0aeb1f6ba88445b7188e"
+          }
+        },
+        {
+          "client_id": "449296951693-ml1t0qjlgr37hpsf6s95vrqk5c9gqoj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy1SPKcBMo7zfSClgjm8qVRMmqjEIJGbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449296951693-ml1t0qjlgr37hpsf6s95vrqk5c9gqoj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
