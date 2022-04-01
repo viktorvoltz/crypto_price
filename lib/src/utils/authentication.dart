@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
+  static String? _name;
+  static String? _email;
+  static String? _photoURL;
+
+  String? get name => _name;
+
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
-    String? name;
-    String? email;
-    String? photoURL;
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
@@ -33,16 +36,16 @@ class Authentication {
         assert(user?.email != null);
         assert(user?.displayName != null);
         assert(user?.photoURL != null);
-        name = user!.displayName;
-        email = user.email;
-        photoURL = user.photoURL;
-        if (name!.contains(" ")) {
-          name = name.substring(0, name.indexOf(" "));
+        _name = user?.displayName;
+        _email = user?.email;
+        _photoURL = user?.photoURL;
+        if (_name!.contains(" ")) {
+          _name = _name!.substring(0, _name!.indexOf(" "));
         }
-        assert(!user.isAnonymous);
-        assert(await user.getIdToken() != null);
+        assert(!user!.isAnonymous);
+        assert(await user?.getIdToken() != null);
         final User currentUser = auth.currentUser!;
-        assert(user.uid == currentUser.uid);
+        assert(user?.uid == currentUser.uid);
 
         print("Successfully loggedin: $user");
 
