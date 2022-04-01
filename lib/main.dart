@@ -2,6 +2,7 @@ import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import './src/utils/authentication.dart';
 
 void main() async{
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Authentication().name == null ? const AuthScreen() : const CryptoList(),
+      home: FirebaseAuth.instance.currentUser == null ? const AuthScreen() : const CryptoList(),
     );
   }
 }
