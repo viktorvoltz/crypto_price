@@ -6,7 +6,7 @@ class Authentication {
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     String? name;
     String? email;
-    String? imageUrl;
+    String? photoURL;
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
@@ -35,7 +35,7 @@ class Authentication {
         assert(user?.photoURL != null);
         name = user!.displayName;
         email = user.email;
-        imageUrl = user.photoURL;
+        photoURL = user.photoURL;
         if (name!.contains(" ")) {
           name = name.substring(0, name.indexOf(" "));
         }
