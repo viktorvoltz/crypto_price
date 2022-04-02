@@ -1,6 +1,9 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +58,71 @@ class _CryptoListState extends State<CryptoList> {
           )
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.zero,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        FirebaseAuth.instance.currentUser!.photoURL!,
+                      ),
+                      radius: 40,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    FirebaseAuth.instance.currentUser!.displayName!,
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    FirebaseAuth.instance.currentUser!.email!,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+                leading: const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.red,
+                ),
+                title: const Text(
+                  "Sign Out",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.red,
+                  ),
+                ),
+                onTap: () {
+                  bloc.bSignOut(context).whenComplete(() {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const AuthScreen();
+                        },
+                      ),
+                    );
+                  });
+                }),
+          ],
+        ),
+      ),
       body: StreamBuilder(
         stream: bloc.coinDataStream,
         builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
@@ -89,7 +157,10 @@ class _CryptoListState extends State<CryptoList> {
     return ListView.builder(
         itemCount: snapshot.data?.length,
         itemBuilder: (BuildContext context, int index) {
-          return CryptoPriceList(snapshot: snapshot, index: index,);
+          return CryptoPriceList(
+            snapshot: snapshot,
+            index: index,
+          );
         });
   }
 }
@@ -127,25 +198,26 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
     final itemList = query.isEmpty
         ? bloc.coinList
         : bloc.coinList!
-            .where((element) => element.name!.toLowerCase().startsWith(query.toLowerCase()))
+            .where((element) =>
+                element.name!.toLowerCase().startsWith(query.toLowerCase()))
             .toList();
-            return itemList!.isEmpty?const Center(child: Text("coin not found")):
-            ListView.builder(
-              itemCount: itemList.length,
-              itemBuilder: (context, index){
-                return Padding(
+    return itemList!.isEmpty
+        ? const Center(child: Text("coin not found"))
+        : ListView.builder(
+            itemCount: itemList.length,
+            itemBuilder: (context, index) {
+              return Padding(
                   padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: Column(
                     children: [
                       ListTile(
-                        onTap: (){
+                        onTap: () {
                           showResults(context);
                         },
                         title: Text(itemList[index].name!),
                       )
                     ],
-                  )
-                  );
+                  ));
             });
   }
 }
