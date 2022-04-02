@@ -8,13 +8,17 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async{
-            await bloc.bSigninWithGoogle(context);
-          },
-          child: const Text(
-            "Signin with Google",
-            style: TextStyle(color: Colors.white),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          color: Colors.black,
+          child: TextButton(
+            onPressed: () async{
+              await bloc.bSigninWithGoogle(context);
+            },
+            child: const Text(
+              "Signin with Google",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
