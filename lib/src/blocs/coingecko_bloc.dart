@@ -37,6 +37,10 @@ class CoingeckoBloc {
     });
   }
 
+  Future<void> bSignOut(BuildContext context) async{
+    await Authentication.signOut(context: context);
+  }
+
   getCoinData() async {
     var response = await CoinGeckoData.getData();
     if (response is Success) {
