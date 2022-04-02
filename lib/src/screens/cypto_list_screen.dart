@@ -32,6 +32,7 @@ class _CryptoListState extends State<CryptoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.black,
         elevation: 1,
         title: Text(
           "Crypto price List",
