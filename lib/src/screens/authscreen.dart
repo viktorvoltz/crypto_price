@@ -1,6 +1,5 @@
-import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:flutter/material.dart';
-import '../utils/authentication.dart';
+import '../blocs/coingecko_bloc.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -10,14 +9,8 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () {
-            Authentication.signInWithGoogle(context: context).whenComplete((){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context){
-                  return const CryptoList();
-                })
-              );
-            });
+          onPressed: () async{
+            await bloc.bSigninWithGoogle(context);
           },
           child: const Text(
             "Signin with Google",
