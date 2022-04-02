@@ -9,16 +9,28 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          height: 40,
+          width: 200,
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
           color: Colors.black,
-          child: TextButton(
-            onPressed: () async{
-              await bloc.bSigninWithGoogle(context);
-            },
-            child: const Text(
-              "Signin with Google",
-              style: TextStyle(color: Colors.white),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/image/search.png",
+                fit: BoxFit.scaleDown,
+              ),
+              const SizedBox(width: 5,),
+              TextButton(
+                onPressed: () async {
+                  await bloc.bSigninWithGoogle(context);
+                },
+                child: const Text(
+                  "Signin with Google",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
           ),
         ),
       ),
