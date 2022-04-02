@@ -112,7 +112,7 @@ class _CryptoListState extends State<CryptoList> {
                 ),
                 onTap: () {
                   bloc.bSignOut(context).whenComplete(() {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) {
                           return const AuthScreen();
