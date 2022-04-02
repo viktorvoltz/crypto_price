@@ -31,7 +31,7 @@ class CoingeckoBloc {
 
   Future<void> bSigninWithGoogle(BuildContext context) async {
     _user = await Authentication.signInWithGoogle(context: context).whenComplete(() {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
         return const CryptoList();
       }));
     });
@@ -45,7 +45,9 @@ class CoingeckoBloc {
     var response = await CoinGeckoData.getData();
     if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
-      _coinDataFetcher.sink.add(coinGecko);
+      if(!_isdisposed){
+        _coinDataFetcher.sink.add(coinGecko);
+      }
       _coinList = [...coinGecko];
 
       ///_coinList.add(coinGecko as CoinGecko);
@@ -56,8 +58,11 @@ class CoingeckoBloc {
     }
   }
 
-  dispose() {
+  bool _isdisposed = false;
+  dispose() async{
+    await _coinDataFetcher.drain();
     _coinDataFetcher.close();
+    _isdisposed = true;
   }
 }
 
