@@ -82,7 +82,7 @@ class Authentication {
 
     try {
       await googleSignIn.signOut();
-      //await FirebaseAuth.instance.signOut();
+      await FirebaseAuth.instance.signOut();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         Authentication.customSnackBar(
