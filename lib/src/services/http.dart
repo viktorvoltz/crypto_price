@@ -18,7 +18,7 @@ class CoinGeckoData {
         response: coinGeckoFromJson(jsonData),
       );
       print('loading from cache');
-      Future.delayed(const Duration(hours: 12), () async{
+      Future.delayed(const Duration(minutes: 5), () async{
         await file.delete();
       });
       return res;
