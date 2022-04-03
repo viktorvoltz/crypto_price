@@ -1,6 +1,7 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
+import 'package:coingecko/src/utils/authentication.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -111,15 +112,23 @@ class _CryptoListState extends State<CryptoList> {
                   ),
                 ),
                 onTap: () {
-                  bloc.bSignOut(context).whenComplete(() {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const AuthScreen();
-                        },
+                  try {
+                    bloc.bSignOut(context).whenComplete(() {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const AuthScreen();
+                          },
+                        ),
+                      );
+                    });
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      Authentication.customSnackBar(
+                        content: 'Error signing out. Try again.',
                       ),
                     );
-                  });
+                  }
                 }),
           ],
         ),
