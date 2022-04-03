@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GoogleSignIn().currentUser == null ? const AuthScreen() : const CryptoList(),
+      home: GoogleSignIn().currentUser == null && FirebaseAuth.instance.currentUser == null? const AuthScreen() : const CryptoList(),
     );
   }
 }
