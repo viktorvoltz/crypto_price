@@ -29,8 +29,11 @@ class CoingeckoBloc {
     _coinList = coinList;
   }
 
+  bool _isbusy = false;
   Future<void> bSigninWithGoogle(BuildContext context) async {
+    _isbusy = true;
     _user = await Authentication.signInWithGoogle(context: context).whenComplete(() {
+      _isbusy = false;
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
         return const CryptoList();
       }));
