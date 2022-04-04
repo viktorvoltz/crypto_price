@@ -1,9 +1,11 @@
+import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import './src/utils/authentication.dart';
 
 void main() async{
@@ -18,14 +20,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider<BusyHandler>(
+      create: (_) => BusyHandler(),
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Crypto App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: GoogleSignIn().currentUser == null && FirebaseAuth.instance.currentUser == null? const AuthScreen() : const CryptoList(),
-    );
+    ));
   }
 }
 
