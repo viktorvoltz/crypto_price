@@ -8,30 +8,37 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: 40,
-          width: 200,
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-          color: Colors.black,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/image/search.png",
-                fit: BoxFit.scaleDown,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 40,
+              width: 200,
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+              color: Colors.black,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/image/search.png",
+                    fit: BoxFit.scaleDown,
+                  ),
+                  const SizedBox(width: 5,),
+                  TextButton(
+                    onPressed: () async {
+                      await bloc.bSigninWithGoogle(context);
+                    },
+                    child: const Text(
+                      "Signin with Google",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 5,),
-              TextButton(
-                onPressed: () async {
-                  await bloc.bSigninWithGoogle(context);
-                },
-                child: const Text(
-                  "Signin with Google",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 10,),
+            bloc.isbusy ? const CircularProgressIndicator(color: Colors.black,) : Container()
+          ],
         ),
       ),
     );
