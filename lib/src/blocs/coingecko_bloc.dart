@@ -14,6 +14,7 @@ class CoingeckoBloc {
 
   List<CoinGecko> _coinList = [];
   List<CoinGecko>? get coinList => _coinList;
+  bool get isbusy => _isbusy;
 
   Stream<List<CoinGecko>> get coinDataStream => _coinDataFetcher.stream;
 
