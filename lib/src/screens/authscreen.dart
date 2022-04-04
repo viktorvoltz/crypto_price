@@ -1,4 +1,6 @@
+import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../blocs/coingecko_bloc.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -6,6 +8,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -26,7 +29,8 @@ class AuthScreen extends StatelessWidget {
                   const SizedBox(width: 5,),
                   TextButton(
                     onPressed: () async {
-                      await bloc.bSigninWithGoogle(context);
+                      //await bloc.bSigninWithGoogle(context);
+                      await busyHandler.bSigninWithGoogle(context);
                     },
                     child: const Text(
                       "Signin with Google",
@@ -37,7 +41,7 @@ class AuthScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10,),
-            bloc.isbusy ? const CircularProgressIndicator(color: Colors.black,) : Container()
+            busyHandler.isbusy ? const CircularProgressIndicator(color: Colors.black,) : Container()
           ],
         ),
       ),
