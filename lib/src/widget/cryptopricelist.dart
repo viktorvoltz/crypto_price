@@ -1,4 +1,5 @@
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
