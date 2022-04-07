@@ -8,9 +8,10 @@ import 'package:path_provider/path_provider.dart';
 class CoinGeckoData {
   static bool _isFromCache = false;
 
-  static bool cacheChecker(){
+  bool get isFromCache => _isFromCache;
+
+  static void cacheChecker(){
     _isFromCache = true;
-    return _isFromCache;
   }
 
   static Future<Object> getData() async {
