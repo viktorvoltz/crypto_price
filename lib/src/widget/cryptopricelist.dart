@@ -17,10 +17,14 @@ class CryptoPriceList extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
         height: 40,
-        child: CoinGeckoData.cacheChecker()
-            ? Image.file(File(snapshot!.data![index!].image.toString()))
-            : Image.network(
+        child: Image.network(
                 snapshot!.data![index!].image.toString(),
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 100,
+                    child: const Text("No data"),
+                  );
+                },
               ),
       ),
       title: Text(
