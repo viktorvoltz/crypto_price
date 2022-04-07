@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +17,11 @@ class CryptoPriceList extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
         height: 40,
-        child: Image.network(
-          snapshot!.data![index!].image.toString(),
-        ),
+        child: CoinGeckoData.cacheChecker()
+            ? Image.file(File(snapshot!.data![index!].image.toString()))
+            : Image.network(
+                snapshot!.data![index!].image.toString(),
+              ),
       ),
       title: Text(
         snapshot!.data![index!].name.toString(),
