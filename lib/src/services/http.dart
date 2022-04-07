@@ -6,6 +6,13 @@ import 'httpStatus.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CoinGeckoData {
+  static bool _isFromCache = false;
+
+  static bool cacheChecker(){
+    _isFromCache = true;
+    return _isFromCache;
+  }
+
   static Future<Object> getData() async {
     String coinFile = "coindata.json";
     var dir = await getTemporaryDirectory();
@@ -18,6 +25,7 @@ class CoinGeckoData {
         response: coinGeckoFromJson(jsonData),
       );
       print('loading from cache');
+      cacheChecker();
       Future.delayed(const Duration(minutes: 5), () async{
         await file.delete();
       });
