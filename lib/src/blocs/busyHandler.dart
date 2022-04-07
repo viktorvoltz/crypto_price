@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class BusyHandler extends ChangeNotifier{
   User? _user;
   bool _isbusy = false;
+  bool _isLoadingFromCache = false;
 
   bool get isbusy => _isbusy;
 
@@ -21,5 +22,9 @@ class BusyHandler extends ChangeNotifier{
         return const CryptoList();
       }));
     });
+  }
+
+  LoadingFrom(){
+    
   }
 }
