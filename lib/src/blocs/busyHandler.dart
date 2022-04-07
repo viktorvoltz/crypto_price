@@ -10,6 +10,7 @@ class BusyHandler extends ChangeNotifier{
   bool _isLoadingFromCache = false;
 
   bool get isbusy => _isbusy;
+  bool get isLoadingFromCache => _isLoadingFromCache;
 
 
   Future<void> bSigninWithGoogle(BuildContext context) async {
@@ -24,7 +25,7 @@ class BusyHandler extends ChangeNotifier{
     });
   }
 
-  LoadingFrom(){
-    
+  void loadingFromCache(){
+    _isLoadingFromCache = true;
   }
 }
