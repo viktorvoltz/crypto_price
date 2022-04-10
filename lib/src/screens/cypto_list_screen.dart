@@ -146,20 +146,6 @@ class _CryptoListState extends State<CryptoList> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.graphic_eq),
-            label: 'price',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'explore'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notification_important), label: 'notification'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'account')
-        ],
-      ),
     );
   }
 
