@@ -16,8 +16,10 @@ class CryptoPriceList extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
+        width: 40,
         height: 40,
         child: CachedNetworkImage(
+          width: 40,
           height: 40,
           fit: BoxFit.contain,
           imageUrl: snapshot!.data![index!].image.toString(),
