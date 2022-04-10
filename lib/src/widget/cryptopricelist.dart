@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class CryptoPriceList extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
         height: 40,
-        child: Image.network(
+        child: /*Image.network(
                 snapshot!.data![index!].image.toString(),
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -25,7 +25,19 @@ class CryptoPriceList extends StatelessWidget {
                     child: const Text("No data"),
                   );
                 },
+              ),*/
+              CachedNetworkImage(
+              height: 40,
+              fit: BoxFit.contain,
+              imageUrl: snapshot!.data![index!].image.toString(),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                size: 100,
+                color: Colors.red,
               ),
+            ),
       ),
       title: Text(
         snapshot!.data![index!].name.toString(),
