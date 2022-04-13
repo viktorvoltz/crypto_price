@@ -1,3 +1,3 @@
 # coingecko price list
 
-<img src=https://user-images.githubusercontent.com/45709308/156387543-2821ece3-2782-4d17-aafd-40a7fd7fa52f.png width=50% height=50%>
+<img src=https://user-images.githubusercontent.com/45709308/162618789-2f32fb1f-703f-4c8b-a62b-8161cfe41203.png width=40% height=40%>
