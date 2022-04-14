@@ -133,18 +133,21 @@ class _CryptoListState extends State<CryptoList> {
           ],
         ),
       ),
-      body: StreamBuilder(
-        stream: bloc.coinDataStream,
-        builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
-          if (snapshot.hasData) {
-            return coinList(snapshot);
-          } else if (snapshot.hasError) {
-            return Center(child: Text(bloc.error!.response.toString()));
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+      body: RefreshIndicator(
+        onRefresh: bloc.getCoinData,
+        child: StreamBuilder(
+          stream: bloc.coinDataStream,
+          builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
+            if (snapshot.hasData) {
+              return coinList(snapshot);
+            } else if (snapshot.hasError) {
+              return Center(child: Text(bloc.error!.response.toString()));
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
       ),
     );
   }
