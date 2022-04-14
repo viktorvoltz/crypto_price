@@ -7,10 +7,11 @@ import 'package:path_provider/path_provider.dart';
 
 class CoinGeckoData {
   static bool _isFromCache = false;
+  static bool _getRequestSuccess = false;
 
   bool get isFromCache => _isFromCache;
 
-  static void cacheChecker(){
+  static void cacheChecker() {
     _isFromCache = true;
   }
 
@@ -27,7 +28,7 @@ class CoinGeckoData {
       );
       print('loading from cache');
       cacheChecker();
-      Future.delayed(const Duration(minutes: 5), () async{
+      Future.delayed(const Duration(minutes: 5), () async {
         await file.delete();
       });
       return res;
@@ -37,6 +38,7 @@ class CoinGeckoData {
           Uri.parse(API_KEY),
         );
         if (response.statusCode == 200) {
+          _getRequestSuccess = true;
           print('loading from API');
           file.writeAsStringSync(
             response.body,
@@ -48,14 +50,21 @@ class CoinGeckoData {
             response: coinGeckoFromJson(response.body),
           );
         }
-      } on HttpException {
-        return Failure(code: 101, response: 'No Internet');
+        //} on HttpException {
+        //return Failure(code: 101, response: 'No Internet');
       } on FormatException {
         return Failure(code: 102, response: 'Invalid Format');
       } catch (e) {
-        return Failure(code: 103, response: 'Invalid Response');
+        //return Failure(code: 103, response: 'Invalid Response');
+        if (_getRequestSuccess == false) retryFuture(getData, 2000);
       }
     }
     return Failure(code: 100, response: 'Invalid Response');
+  }
+
+  static retryFuture(future, delay) {
+    Future.delayed(Duration(milliseconds: delay), () {
+      future();
+    });
   }
 }
