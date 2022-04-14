@@ -45,7 +45,7 @@ class CoingeckoBloc {
     await Authentication.signOut(context: context);
   }
 
-  getCoinData() async {
+  Future<void> getCoinData() async {
     var response = await CoinGeckoData.getData();
     if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
