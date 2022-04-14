@@ -28,7 +28,7 @@ class CoinGeckoData {
       );
       print('loading from cache');
       cacheChecker();
-      Future.delayed(const Duration(minutes: 5), () async {
+      Future.delayed(const Duration(minutes: 1), () async {
         await file.delete();
       });
       return res;
