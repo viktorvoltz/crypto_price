@@ -11,6 +11,8 @@ class CoinGeckoData {
 
   bool get isFromCache => _isFromCache;
 
+  static late File _file;
+
   static void cacheChecker() {
     _isFromCache = true;
   }
@@ -20,6 +22,7 @@ class CoinGeckoData {
     var dir = await getTemporaryDirectory();
 
     File file = File(dir.path + "/" + coinFile);
+    _file = file;
 
     if (file.existsSync()) {
       var jsonData = file.readAsStringSync();
@@ -66,5 +69,23 @@ class CoinGeckoData {
     Future.delayed(Duration(milliseconds: delay), () {
       future();
     });
+  }
+
+  static Future<Object> refreshData() async {
+    try{
+      final response = await http.get(
+        Uri.parse(API_KEY)
+      );
+
+      if(response.statusCode == 200){
+        _file.writeAsStringSync(
+            response.body,
+            flush: true,
+            mode: FileMode.write,
+          );
+      }
+    }catch(e){
+
+    }
   }
 }
