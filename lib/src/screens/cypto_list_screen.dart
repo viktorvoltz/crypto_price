@@ -134,7 +134,7 @@ class _CryptoListState extends State<CryptoList> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: bloc.getCoinData,
+        onRefresh: bloc.refreshData,
         child: StreamBuilder(
           stream: bloc.coinDataStream,
           builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
