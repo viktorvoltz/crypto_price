@@ -11,7 +11,7 @@ class CoinGeckoData {
 
   bool get isFromCache => _isFromCache;
 
-  static late File _file;
+  static File _file = File(".");
 
   static void cacheChecker() {
     _isFromCache = true;
@@ -77,6 +77,7 @@ class CoinGeckoData {
       final response = await http.get(Uri.parse(API_KEY));
 
       if (response.statusCode == 200) {
+        print('refresh from API');
         _file.writeAsStringSync(
           response.body,
           flush: true,
