@@ -22,6 +22,7 @@ class CoinGeckoData {
     var dir = await getTemporaryDirectory();
 
     File file = File(dir.path + "/" + coinFile);
+    if (_file.existsSync()) file = _file;
     _file = file;
 
     if (file.existsSync()) {
