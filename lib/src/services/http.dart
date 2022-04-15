@@ -72,20 +72,23 @@ class CoinGeckoData {
   }
 
   static Future<Object> refreshData() async {
-    try{
-      final response = await http.get(
-        Uri.parse(API_KEY)
-      );
+    try {
+      final response = await http.get(Uri.parse(API_KEY));
 
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         _file.writeAsStringSync(
-            response.body,
-            flush: true,
-            mode: FileMode.write,
+          response.body,
+          flush: true,
+          mode: FileMode.write,
+        );
+
+         return Success(
+            response: coinGeckoFromJson(response.body),
           );
       }
-    }catch(e){
-
+    } on HttpException {
+      return Failure(code: 101, response: "No internet");
     }
+    return Failure(code: 100, response: 'Invalid Response');
   }
 }
