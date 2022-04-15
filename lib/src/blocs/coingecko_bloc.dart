@@ -62,6 +62,22 @@ class CoingeckoBloc {
     }
   }
 
+  Future<void> refreshData() async {
+    var response = await CoinGeckoData.refreshData();
+    if (response is Success) {
+      List<CoinGecko> coinGecko = response.response!;
+      if(!_isdisposed){
+        _coinDataFetcher.sink.add(coinGecko);
+      }
+      _coinList = [...coinGecko];
+
+      setCoinList(_coinList);
+    } else if (response is Failure) {
+      Failure error = Failure(code: response.code, response: response.response);
+      setError(error);
+    }
+  }
+
   bool _isdisposed = false;
   dispose() async{
     await _coinDataFetcher.drain();
