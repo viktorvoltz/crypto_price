@@ -66,7 +66,7 @@ class CoinGeckoData {
     return Failure(code: 100, response: 'Invalid Response');
   }
 
-  static retryFuture(future, delay) {
+  static retryFuture(Function future, int delay) {
     Future.delayed(Duration(milliseconds: delay), () {
       future();
     });
