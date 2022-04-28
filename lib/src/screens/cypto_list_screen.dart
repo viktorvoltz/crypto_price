@@ -94,6 +94,7 @@ class _CryptoListState extends State<CryptoList> {
 }
 
 class CryptoSearch extends SearchDelegate<CoinGecko> {
+  late CoinGecko coindata;
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -118,7 +119,14 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(child: Text(query));
+    return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(coindata.name!),
+        Text(coindata.priceChange24H!.toString()),
+      ],
+    ));
   }
 
   @override
@@ -140,6 +148,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
                     children: [
                       ListTile(
                         onTap: () {
+                          coindata = itemList[index];
                           query = itemList[index].name!;
                           showResults(context);
                         },
