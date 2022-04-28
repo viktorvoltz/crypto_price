@@ -140,6 +140,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
                     children: [
                       ListTile(
                         onTap: () {
+                          query = itemList[index].name!;
                           showResults(context);
                         },
                         title: Text(itemList[index].name!),
