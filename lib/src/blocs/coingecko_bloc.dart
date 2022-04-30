@@ -80,7 +80,7 @@ class CoingeckoBloc {
       setError(error);
     }
     }on SocketException{
-      Failure(code: 500, response: "No internet connection");
+      _error = Failure(code: 500, response: "No internet connection");
     }
   }
 
