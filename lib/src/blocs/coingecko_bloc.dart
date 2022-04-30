@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:coingecko/src/services/http.dart';
@@ -63,6 +65,7 @@ class CoingeckoBloc {
   }
 
   Future<void> refreshData() async {
+    try{
     var response = await CoinGeckoData.refreshData();
     if (response is Success) {
       List<CoinGecko> coinGecko = response.response!;
@@ -75,6 +78,9 @@ class CoingeckoBloc {
     } else if (response is Failure) {
       Failure error = Failure(code: response.code, response: response.response);
       setError(error);
+    }
+    }on SocketException{
+      Failure(code: 500, response: "No internet connection");
     }
   }
 
