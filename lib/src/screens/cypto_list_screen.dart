@@ -73,8 +73,22 @@ class _CryptoListState extends State<CryptoList> {
               } else if (snapshot.hasError) {
                 print("failed to refresh");
                 //bloc.getCoinData();
-                return Text(
-                  bloc.error!.response.toString(),
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        bloc.error!.response.toString(),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                        onPressed: bloc.refreshData,
+                        child: const Text("Try Again"),
+                      ),
+                    ],
+                  ),
                 );
               }
               return const Center(
