@@ -60,6 +60,7 @@ class CoingeckoBloc {
       setCoinList(_coinList);
     } else if (response is Failure) {
       Failure error = Failure(code: response.code, response: response.response);
+      _coinDataFetcher.sink.addError(error);
       setError(error);
     }
   }
@@ -82,7 +83,7 @@ class CoingeckoBloc {
     }on SocketException{
       print("FAILED REF");
       _error = Failure(code: 500, response: "No internet connection");
-      _coinDataFetcher.sink.addError(error!);
+      _coinDataFetcher.sink.addError(_error!);
     }
   }
 
