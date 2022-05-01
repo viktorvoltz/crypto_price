@@ -64,22 +64,24 @@ class _CryptoListState extends State<CryptoList> {
       ),
       drawer: const DrawerWidget(),
       body: RefreshIndicator(
-        onRefresh: bloc.refreshData,
-        child: StreamBuilder(
-                stream: bloc.coinDataStream,
-                builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
-                  if (snapshot.hasData) {
-                    return coinList(snapshot);
-                  } else if (snapshot.hasError) {
-                    print("failed");
-                    return Center(child: Text(bloc.error!.response.toString()));
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              )
-      ),
+          onRefresh: bloc.refreshData,
+          child: StreamBuilder(
+            stream: bloc.coinDataStream,
+            builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
+              if (snapshot.hasData) {
+                return coinList(snapshot);
+              } else if (snapshot.hasError) {
+                print("failed to refresh");
+                //bloc.getCoinData();
+                return Text(
+                  bloc.error!.response.toString(),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          )),
     );
   }
 
