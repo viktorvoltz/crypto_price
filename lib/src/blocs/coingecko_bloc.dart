@@ -80,7 +80,9 @@ class CoingeckoBloc {
       setError(error);
     }
     }on SocketException{
+      print("FAILED REF");
       _error = Failure(code: 500, response: "No internet connection");
+      _coinDataFetcher.sink.addError(error!);
     }
   }
 
