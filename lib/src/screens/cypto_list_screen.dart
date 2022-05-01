@@ -1,6 +1,7 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
+import 'package:coingecko/src/services/httpStatus.dart';
 import 'package:coingecko/src/utils/authentication.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:coingecko/src/widget/drawer.dart';
@@ -65,18 +66,19 @@ class _CryptoListState extends State<CryptoList> {
       body: RefreshIndicator(
         onRefresh: bloc.refreshData,
         child: StreamBuilder(
-          stream: bloc.coinDataStream,
-          builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
-            if (snapshot.hasData) {
-              return coinList(snapshot);
-            } else if (snapshot.hasError) {
-              return Center(child: Text(bloc.error!.response.toString()));
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+                stream: bloc.coinDataStream,
+                builder: (context, AsyncSnapshot<List<CoinGecko>> snapshot) {
+                  if (snapshot.hasData) {
+                    return coinList(snapshot);
+                  } else if (snapshot.hasError) {
+                    print("failed");
+                    return Center(child: Text(bloc.error!.response.toString()));
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              )
       ),
     );
   }
@@ -121,7 +123,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
   Widget buildResults(BuildContext context) {
     return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(coindata.name!),
         Text(coindata.priceChange24H!.toString()),
