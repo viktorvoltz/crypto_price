@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,11 @@ class CryptoPriceList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+          return CryptoDetail(detail: snapshot!.data![index!],);
+        }));
+      },
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
         width: 40,
