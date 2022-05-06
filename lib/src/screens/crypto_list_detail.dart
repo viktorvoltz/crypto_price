@@ -12,7 +12,7 @@ class CryptoDetail extends StatelessWidget {
         title: Text(detail!.name.toString()),
       ),
       body: Center(
-        child: Text(detail!.marketCap.toString()),
+        child: Text("Market Cap: \$${detail!.marketCap.toString()}"),
       ),
     );
   }
