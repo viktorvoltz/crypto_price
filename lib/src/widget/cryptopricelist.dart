@@ -8,12 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CryptoPriceList extends StatelessWidget {
+class CryptoPriceList extends StatefulWidget {
   final AsyncSnapshot<List<CoinGecko>>? snapshot;
   final int? index;
   const CryptoPriceList({Key? key, this.snapshot, this.index})
       : super(key: key);
 
+  @override
+  State<CryptoPriceList> createState() => _CryptoPriceListState();
+}
+
+class _CryptoPriceListState extends State<CryptoPriceList> {
   @override
   Widget build(BuildContext context) {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
@@ -27,15 +32,15 @@ class CryptoPriceList extends StatelessWidget {
               width: 25,
               child: GestureDetector(
                 onTap: () {
-                  busyHandler.favoriteFunc();
+                  //busyHandler.favoriteFunc();
+                  setState(() {
+                    widget.snapshot!.data![widget.index!].isFavourited = !widget.snapshot!.data![widget.index!].isFavourited;
+                  });
                 },
                 child: Container(
                   width: double.infinity,
-                  child: busyHandler.isFavorite
-                      ? const Icon(
-                          Icons.star,
-                          color: Colors.blue,
-                        )
+                  child: widget.snapshot!.data![widget.index!].isFavourited 
+                      ? const Icon(Icons.star, color: Color.fromARGB(255, 6, 136, 241))
                       : const Icon(
                           Icons.star_border,
                           color: Color.fromARGB(255, 6, 136, 241),
@@ -51,7 +56,7 @@ class CryptoPriceList extends StatelessWidget {
                 width: 40,
                 height: 40,
                 fit: BoxFit.contain,
-                imageUrl: snapshot!.data![index!].image.toString(),
+                imageUrl: widget.snapshot!.data![widget.index!].image.toString(),
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     CircularProgressIndicator(value: downloadProgress.progress),
                 errorWidget: (context, url, error) => const Icon(
@@ -68,19 +73,19 @@ class CryptoPriceList extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
             return CryptoDetail(
-              detail: snapshot!.data![index!],
+              detail: widget.snapshot!.data![widget.index!],
             );
           }));
         },
         child: Text(
-          snapshot!.data![index!].name.toString(),
+          widget.snapshot!.data![widget.index!].name.toString(),
           style: GoogleFonts.titilliumWeb(fontSize: 25),
         ),
       ),
-      subtitle: Text('\$' + snapshot!.data![index!].currentPrice.toString()),
+      subtitle: Text('\$' + widget.snapshot!.data![widget.index!].currentPrice.toString()),
       trailing: Text(
-        snapshot!.data![index!].priceChange24H!.toStringAsFixed(3),
-        style: snapshot!.data![index!].priceChange24H.toString().startsWith("-")
+        widget.snapshot!.data![widget.index!].priceChange24H!.toStringAsFixed(3),
+        style: widget.snapshot!.data![widget.index!].priceChange24H.toString().startsWith("-")
             ? GoogleFonts.titilliumWeb(
                 fontWeight: FontWeight.w700, color: Colors.red)
             : GoogleFonts.titilliumWeb(
