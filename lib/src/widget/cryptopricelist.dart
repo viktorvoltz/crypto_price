@@ -15,32 +15,56 @@ class CryptoPriceList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context){
-          return CryptoDetail(detail: snapshot!.data![index!],);
-        }));
-      },
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
-        width: 40,
-        height: 40,
-        child: CachedNetworkImage(
-          width: 40,
-          height: 40,
-          fit: BoxFit.contain,
-          imageUrl: snapshot!.data![index!].image.toString(),
-          progressIndicatorBuilder: (context, url, downloadProgress) =>
-              CircularProgressIndicator(value: downloadProgress.progress),
-          errorWidget: (context, url, error) => const Icon(
-            Icons.error,
-            size: 30,
-            color: Colors.red,
-          ),
+        width: 80,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 5,
+              child: GestureDetector(
+                onTap: (){
+
+                },
+                child: const Icon(
+                  Icons.star_border,
+                  color: Color.fromARGB(255, 6, 136, 241),
+                ),
+              ),
+            ),
+            const Spacer(),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: CachedNetworkImage(
+                width: 40,
+                height: 40,
+                fit: BoxFit.contain,
+                imageUrl: snapshot!.data![index!].image.toString(),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    CircularProgressIndicator(value: downloadProgress.progress),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  size: 30,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      title: Text(
-        snapshot!.data![index!].name.toString(),
-        style: GoogleFonts.titilliumWeb(fontSize: 25),
+      title: GestureDetector(
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return CryptoDetail(
+            detail: snapshot!.data![index!],
+          );
+        }));
+        },
+        child: Text(
+          snapshot!.data![index!].name.toString(),
+          style: GoogleFonts.titilliumWeb(fontSize: 25),
+        ),
       ),
       subtitle: Text('\$' + snapshot!.data![index!].currentPrice.toString()),
       trailing: Text(
