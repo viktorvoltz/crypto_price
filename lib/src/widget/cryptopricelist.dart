@@ -7,6 +7,7 @@ import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CryptoPriceList extends StatefulWidget {
   final AsyncSnapshot<List<CoinGecko>>? snapshot;
@@ -20,6 +21,26 @@ class CryptoPriceList extends StatefulWidget {
 
 class _CryptoPriceListState extends State<CryptoPriceList> {
   @override
+  void initState() {
+    checkValue();
+    super.initState();
+  }
+
+
+  void checkValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var check = prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}');
+    //print(widget.snapshot!.data![widget.index!].id);
+    if(prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == false || prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == null){
+      widget.snapshot!.data![widget.index!].isFavourited = false;
+    }
+    if(prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == true){
+      widget.snapshot!.data![widget.index!].isFavourited = true;
+    }
+    print(widget.snapshot!.data![widget.index!].isFavourited);
+  }
+
+  @override
   Widget build(BuildContext context) {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return ListTile(
@@ -31,15 +52,22 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             SizedBox(
               width: 25,
               child: GestureDetector(
-                onTap: () {
+                onTap: () async{
                   //busyHandler.favoriteFunc();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   setState(() {
+                    if(widget.snapshot!.data![widget.index!].isFavourited == false){
+                      prefs.setBool("fav${widget.snapshot!.data![widget.index!].id}", true);
+                    }
+                    if(widget.snapshot!.data![widget.index!].isFavourited == true){
+                      prefs.setBool("fav${widget.snapshot!.data![widget.index!].id}", false);
+                    }
                     widget.snapshot!.data![widget.index!].isFavourited = !widget.snapshot!.data![widget.index!].isFavourited;
                   });
                 },
                 child: Container(
                   width: double.infinity,
-                  child: widget.snapshot!.data![widget.index!].isFavourited 
+                  child: widget.snapshot!.data![widget.index!].isFavourited
                       ? const Icon(Icons.star, color: Color.fromARGB(255, 6, 136, 241))
                       : const Icon(
                           Icons.star_border,
