@@ -1,8 +1,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 List<CoinGecko> coinGeckoFromJson(String str) => List<CoinGecko>.from(json.decode(str).map((x) => CoinGecko.fromJson(x)));
 
 String coinGeckoToJson(List<CoinGecko> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
