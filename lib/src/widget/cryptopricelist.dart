@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CryptoPriceList extends StatelessWidget {
   final AsyncSnapshot<List<CoinGecko>>? snapshot;
@@ -14,6 +16,7 @@ class CryptoPriceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
@@ -21,14 +24,22 @@ class CryptoPriceList extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: 5,
+              width: 25,
               child: GestureDetector(
-                onTap: (){
-
+                onTap: () {
+                  busyHandler.favoriteFunc();
                 },
-                child: const Icon(
-                  Icons.star_border,
-                  color: Color.fromARGB(255, 6, 136, 241),
+                child: Container(
+                  width: double.infinity,
+                  child: busyHandler.isFavorite
+                      ? const Icon(
+                          Icons.star,
+                          color: Colors.blue,
+                        )
+                      : const Icon(
+                          Icons.star_border,
+                          color: Color.fromARGB(255, 6, 136, 241),
+                        ),
                 ),
               ),
             ),
@@ -54,12 +65,12 @@ class CryptoPriceList extends StatelessWidget {
         ),
       ),
       title: GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return CryptoDetail(
-            detail: snapshot!.data![index!],
-          );
-        }));
+            return CryptoDetail(
+              detail: snapshot!.data![index!],
+            );
+          }));
         },
         child: Text(
           snapshot!.data![index!].name.toString(),
