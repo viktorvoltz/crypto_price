@@ -22,8 +22,8 @@ class CryptoPriceList extends StatefulWidget {
 class _CryptoPriceListState extends State<CryptoPriceList> {
   @override
   void initState() {
-    checkValue();
     super.initState();
+    checkValue();
   }
 
 
@@ -37,7 +37,8 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
     if(prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == true){
       widget.snapshot!.data![widget.index!].isFavourited = true;
     }
-    print(widget.snapshot!.data![widget.index!].isFavourited);
+    setState(() { 
+    });
   }
 
   @override
@@ -68,10 +69,10 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                 child: Container(
                   width: double.infinity,
                   child: widget.snapshot!.data![widget.index!].isFavourited
-                      ? const Icon(Icons.star, color: Color.fromARGB(255, 6, 136, 241))
+                      ? const Icon(Icons.star, color: Colors.black)
                       : const Icon(
                           Icons.star_border,
-                          color: Color.fromARGB(255, 6, 136, 241),
+                          color: Colors.black,
                         ),
                 ),
               ),
