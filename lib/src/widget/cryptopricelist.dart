@@ -111,7 +111,13 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
           style: GoogleFonts.titilliumWeb(fontSize: 25),
         ),
       ),
-      subtitle: Text('\$' + widget.snapshot!.data![widget.index!].currentPrice.toString()),
+      subtitle: Row(
+        children: [
+          Text('\$' + widget.snapshot!.data![widget.index!].currentPrice.toString()),
+          const SizedBox(width: 10,),
+          Text('('+ widget.snapshot!.data![widget.index!].symbol.toString().toUpperCase() + ')')
+        ],
+      ),
       trailing: Text(
         widget.snapshot!.data![widget.index!].priceChange24H!.toStringAsFixed(3),
         style: widget.snapshot!.data![widget.index!].priceChange24H.toString().startsWith("-")
