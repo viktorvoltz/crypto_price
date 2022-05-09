@@ -141,7 +141,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
     String priceChange24H =
         widget.snapshot!.data![widget.index!].priceChange24H.toString();
     return Container(
-      width: 90,
+      width: 95,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
