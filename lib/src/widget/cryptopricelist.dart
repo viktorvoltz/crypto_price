@@ -26,19 +26,21 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
     checkValue();
   }
 
-
   void checkValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var check = prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}');
     //print(widget.snapshot!.data![widget.index!].id);
-    if(prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == false || prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == null){
+    if (prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
+            false ||
+        prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
+            null) {
       widget.snapshot!.data![widget.index!].isFavourited = false;
     }
-    if(prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') == true){
+    if (prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
+        true) {
       widget.snapshot!.data![widget.index!].isFavourited = true;
     }
-    setState(() { 
-    });
+    setState(() {});
   }
 
   @override
@@ -53,17 +55,25 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             SizedBox(
               width: 25,
               child: GestureDetector(
-                onTap: () async{
+                onTap: () async {
                   //busyHandler.favoriteFunc();
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
                   setState(() {
-                    if(widget.snapshot!.data![widget.index!].isFavourited == false){
-                      prefs.setBool("fav${widget.snapshot!.data![widget.index!].id}", true);
+                    if (widget.snapshot!.data![widget.index!].isFavourited ==
+                        false) {
+                      prefs.setBool(
+                          "fav${widget.snapshot!.data![widget.index!].id}",
+                          true);
                     }
-                    if(widget.snapshot!.data![widget.index!].isFavourited == true){
-                      prefs.setBool("fav${widget.snapshot!.data![widget.index!].id}", false);
+                    if (widget.snapshot!.data![widget.index!].isFavourited ==
+                        true) {
+                      prefs.setBool(
+                          "fav${widget.snapshot!.data![widget.index!].id}",
+                          false);
                     }
-                    widget.snapshot!.data![widget.index!].isFavourited = !widget.snapshot!.data![widget.index!].isFavourited;
+                    widget.snapshot!.data![widget.index!].isFavourited =
+                        !widget.snapshot!.data![widget.index!].isFavourited;
                   });
                 },
                 child: Container(
@@ -85,7 +95,8 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                 width: 40,
                 height: 40,
                 fit: BoxFit.contain,
-                imageUrl: widget.snapshot!.data![widget.index!].image.toString(),
+                imageUrl:
+                    widget.snapshot!.data![widget.index!].image.toString(),
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     CircularProgressIndicator(value: downloadProgress.progress),
                 errorWidget: (context, url, error) => const Icon(
@@ -108,29 +119,53 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
         },
         child: Text(
           widget.snapshot!.data![widget.index!].name.toString(),
+          overflow: TextOverflow.clip,
           style: GoogleFonts.titilliumWeb(fontSize: 25),
         ),
       ),
-      subtitle: Row(
-        children: [
-          Text('\$' + widget.snapshot!.data![widget.index!].currentPrice.toString()),
-          const SizedBox(width: 10,),
-          Text('('+ widget.snapshot!.data![widget.index!].symbol.toString().toUpperCase() + ')')
-        ],
+      subtitle: Text(
+        '\$' +
+            widget.snapshot!.data![widget.index!].currentPrice.toString() + "   "
+            '(' +
+            widget.snapshot!.data![widget.index!].symbol
+                .toString()
+                .toUpperCase() +
+            ')',
+        overflow: TextOverflow.clip,
       ),
       trailing: priceChange(),
     );
   }
 
-  Widget priceChange(){
-    return Text(
-        widget.snapshot!.data![widget.index!].priceChange24H!.toStringAsFixed(3),
-        style: widget.snapshot!.data![widget.index!].priceChange24H.toString().startsWith("-")
-            ? GoogleFonts.titilliumWeb(
-                fontWeight: FontWeight.w700, color: Colors.red)
-            : GoogleFonts.titilliumWeb(
-                fontWeight: FontWeight.w700,
-                color: const Color.fromARGB(255, 3, 150, 8)),
-      );
+  Widget priceChange() {
+    String priceChange24H =
+        widget.snapshot!.data![widget.index!].priceChange24H.toString();
+    return Container(
+      width: 90,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Icon(
+            priceChange24H.startsWith("-")
+                ? Icons.arrow_drop_down
+                : Icons.arrow_upward,
+            color: priceChange24H.startsWith("-")
+                ? const Color.fromARGB(255, 207, 24, 11)
+                : const Color.fromARGB(255, 3, 233, 11),
+          ),
+          Text(
+            widget.snapshot!.data![widget.index!].priceChange24H!
+                .toStringAsFixed(3),
+            overflow: TextOverflow.clip,
+            style: priceChange24H.toString().startsWith("-")
+                ? GoogleFonts.titilliumWeb(
+                    fontWeight: FontWeight.w700, color: Colors.red)
+                : GoogleFonts.titilliumWeb(
+                    fontWeight: FontWeight.w700,
+                    color: const Color.fromARGB(255, 3, 150, 8)),
+          ),
+        ],
+      ),
+    );
   }
 }
