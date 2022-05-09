@@ -118,7 +118,12 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
           Text('('+ widget.snapshot!.data![widget.index!].symbol.toString().toUpperCase() + ')')
         ],
       ),
-      trailing: Text(
+      trailing: priceChange(),
+    );
+  }
+
+  Widget priceChange(){
+    return Text(
         widget.snapshot!.data![widget.index!].priceChange24H!.toStringAsFixed(3),
         style: widget.snapshot!.data![widget.index!].priceChange24H.toString().startsWith("-")
             ? GoogleFonts.titilliumWeb(
@@ -126,7 +131,6 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             : GoogleFonts.titilliumWeb(
                 fontWeight: FontWeight.w700,
                 color: const Color.fromARGB(255, 3, 150, 8)),
-      ),
-    );
+      );
   }
 }
