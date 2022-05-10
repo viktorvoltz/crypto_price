@@ -138,26 +138,26 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   }
 
   Widget priceChange() {
-    String priceChange24H =
-        widget.snapshot!.data![widget.index!].priceChange24H.toString();
+    String priceChangePercentage24H =
+        widget.snapshot!.data![widget.index!].priceChangePercentage24H.toString();
     return Container(
       width: 95,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Icon(
-            priceChange24H.startsWith("-")
+            priceChangePercentage24H.startsWith("-")
                 ? Icons.arrow_drop_down
                 : Icons.arrow_upward,
-            color: priceChange24H.startsWith("-")
+            color: priceChangePercentage24H.startsWith("-")
                 ? const Color.fromARGB(255, 207, 24, 11)
                 : const Color.fromARGB(255, 3, 233, 11),
           ),
           Text(
-            widget.snapshot!.data![widget.index!].priceChange24H!
-                .toStringAsFixed(3),
+            "${widget.snapshot!.data![widget.index!].priceChangePercentage24H!
+                .toStringAsFixed(3)}  %",
             overflow: TextOverflow.clip,
-            style: priceChange24H.toString().startsWith("-")
+            style: priceChangePercentage24H.toString().startsWith("-")
                 ? GoogleFonts.titilliumWeb(
                     fontWeight: FontWeight.w700, color: Colors.red)
                 : GoogleFonts.titilliumWeb(
