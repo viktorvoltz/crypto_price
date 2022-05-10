@@ -8,16 +8,9 @@ import 'package:flutter/material.dart';
 class BusyHandler extends ChangeNotifier{
   User? _user;
   bool _isbusy = false;
-  bool _isFavorite = false;
-  CoinGecko? coinGecko;
 
   bool get isbusy => _isbusy;
-  bool get isFavorite => _isFavorite;
 
-  void favoriteFunc(){
-    coinGecko!.isFavourited = !coinGecko!.isFavourited;
-    notifyListeners();
-  }
 
 
   Future<void> bSigninWithGoogle(BuildContext context) async {
