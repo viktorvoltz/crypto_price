@@ -4,6 +4,7 @@ import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/services/http.dart';
+import 'package:coingecko/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -102,7 +103,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                 errorWidget: (context, url, error) => const Icon(
                   Icons.error,
                   size: 30,
-                  color: Colors.red,
+                  color: negative,
                 ),
               ),
             ),
@@ -148,10 +149,10 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
           Icon(
             priceChangePercentage24H.startsWith("-")
                 ? Icons.arrow_drop_down
-                : Icons.arrow_upward,
+                : Icons.arrow_drop_up,
             color: priceChangePercentage24H.startsWith("-")
-                ? const Color.fromARGB(255, 207, 24, 11)
-                : const Color.fromARGB(255, 3, 233, 11),
+                ? negative
+                : positive,
           ),
           Text(
             "${widget.snapshot!.data![widget.index!].priceChangePercentage24H!
@@ -159,10 +160,10 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             overflow: TextOverflow.clip,
             style: priceChangePercentage24H.toString().startsWith("-")
                 ? GoogleFonts.titilliumWeb(
-                    fontWeight: FontWeight.w700, color: Colors.red)
+                    fontWeight: FontWeight.w700, color: negative)
                 : GoogleFonts.titilliumWeb(
                     fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 3, 150, 8)),
+                    color: positive),
           ),
         ],
       ),
