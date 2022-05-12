@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class BusyHandler extends ChangeNotifier{
   User? _user;
   bool _isbusy = false;
-  bool _refStatus = false;
+  bool _refStatus = true;
 
   bool get isbusy => _isbusy;
   bool get refStatus => _refStatus;
