@@ -1,3 +1,4 @@
+import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CryptoList extends StatefulWidget {
   const CryptoList({Key? key}) : super(key: key);
@@ -72,6 +74,7 @@ class _CryptoListState extends State<CryptoList> {
                 return coinList(snapshot);
               } else if (snapshot.hasError) {
                 print("failed to refresh");
+                bool refreshStatus = false;
                 //bloc.getCoinData();
                 return Center(
                   child: Column(
@@ -84,9 +87,15 @@ class _CryptoListState extends State<CryptoList> {
                         height: 10,
                       ),
                       TextButton(
-                        onPressed: bloc.refreshData,
+                        onPressed: () {
+                          refreshStatus = true;
+                          bloc.refreshData();
+                        },
                         child: const Text("Try Again"),
                       ),
+                      refreshStatus
+                          ? const Center(child: CircularProgressIndicator())
+                          : Container(),
                     ],
                   ),
                 );
