@@ -11,8 +11,6 @@ class BusyHandler extends ChangeNotifier{
 
   bool get isbusy => _isbusy;
 
-
-
   Future<void> bSigninWithGoogle(BuildContext context) async {
     _isbusy = true;
     notifyListeners();
@@ -24,4 +22,6 @@ class BusyHandler extends ChangeNotifier{
       }));
     });
   }
+
+
 }
