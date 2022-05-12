@@ -35,6 +35,7 @@ class _CryptoListState extends State<CryptoList> {
 
   @override
   Widget build(BuildContext context) {
+    BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
@@ -74,7 +75,6 @@ class _CryptoListState extends State<CryptoList> {
                 return coinList(snapshot);
               } else if (snapshot.hasError) {
                 print("failed to refresh");
-                bool refreshStatus = false;
                 //bloc.getCoinData();
                 return Center(
                   child: Column(
@@ -88,12 +88,12 @@ class _CryptoListState extends State<CryptoList> {
                       ),
                       TextButton(
                         onPressed: () {
-                          refreshStatus = true;
+                          busyHandler.refreshStatus();
                           bloc.refreshData();
                         },
                         child: const Text("Try Again"),
                       ),
-                      refreshStatus
+                      busyHandler.refStatus
                           ? const Center(child: CircularProgressIndicator())
                           : Container(),
                     ],
