@@ -21,6 +21,19 @@ class _CryptoDetailState extends State<CryptoDetail> {
           children: [
             Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
             Text("total volume: \$${widget.detail!.totalVolume.toString()}"),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text("ATL: ${widget.detail!.atl.toString()}"),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Text("ATH: ${widget.detail!.ath.toString()}"),
+                ),
+              ],
+            ),
             SliderTheme(
               data: const SliderThemeData(
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0),
