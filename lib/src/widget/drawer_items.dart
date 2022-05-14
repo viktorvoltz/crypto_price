@@ -1,5 +1,6 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
+import 'package:coingecko/src/screens/starred_crypto.dart';
 import 'package:coingecko/src/utils/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -53,23 +54,13 @@ class DrawerItem extends StatelessWidget {
               ),
             ),
             onTap: () {
-              try {
-                bloc.bSignOut(context).whenComplete(() {
-                  Navigator.of(context).pushReplacement(
+              Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return const AuthScreen();
+                        return const StarredCrypto();
                       },
                     ),
                   );
-                });
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  Authentication.customSnackBar(
-                    content: 'Error signing out. Try again.',
-                  ),
-                );
-              }
             })
       ],
     );
