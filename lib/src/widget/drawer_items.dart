@@ -43,14 +43,13 @@ class DrawerItem extends StatelessWidget {
             }),
         ListTile(
             leading: const Icon(
-              Icons.exit_to_app,
-              color: Colors.red,
+              Icons.star,
+              color: Colors.black,
             ),
             title: const Text(
-              "Sign Out",
+              "Starred Items",
               style: TextStyle(
                 fontSize: 18,
-                color: Colors.red,
               ),
             ),
             onTap: () {
