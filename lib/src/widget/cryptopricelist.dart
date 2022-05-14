@@ -61,17 +61,17 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   setState(() {
-                    if (widget.snapshot!.data![widget.index!].isFavourited ==
-                        false) {
+                    if (widget.snapshot!.data![widget.index!].isFavourited == false) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           true);
+                      busyHandler.addToStarredList(widget.snapshot!.data![widget.index!]);
                     }
-                    if (widget.snapshot!.data![widget.index!].isFavourited ==
-                        true) {
+                    if (widget.snapshot!.data![widget.index!].isFavourited == true) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           false);
+                      busyHandler.removeFromStarredList(widget.snapshot!.data![widget.index!]);
                     }
                     widget.snapshot!.data![widget.index!].isFavourited =
                         !widget.snapshot!.data![widget.index!].isFavourited;
@@ -126,8 +126,9 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
       ),
       subtitle: Text(
         '\$' +
-            widget.snapshot!.data![widget.index!].currentPrice.toString() + "   "
-            '(' +
+            widget.snapshot!.data![widget.index!].currentPrice.toString() +
+            "   "
+                '(' +
             widget.snapshot!.data![widget.index!].symbol
                 .toString()
                 .toUpperCase() +
@@ -139,8 +140,9 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   }
 
   Widget priceChange() {
-    String priceChangePercentage24H =
-        widget.snapshot!.data![widget.index!].priceChangePercentage24H.toString();
+    String priceChangePercentage24H = widget
+        .snapshot!.data![widget.index!].priceChangePercentage24H
+        .toString();
     return Container(
       width: 95,
       child: Row(
@@ -150,20 +152,17 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             priceChangePercentage24H.startsWith("-")
                 ? Icons.arrow_drop_down
                 : Icons.arrow_drop_up,
-            color: priceChangePercentage24H.startsWith("-")
-                ? negative
-                : positive,
+            color:
+                priceChangePercentage24H.startsWith("-") ? negative : positive,
           ),
           Text(
-            "${widget.snapshot!.data![widget.index!].priceChangePercentage24H!
-                .toStringAsFixed(3)}  %",
+            "${widget.snapshot!.data![widget.index!].priceChangePercentage24H!.toStringAsFixed(3)}  %",
             overflow: TextOverflow.clip,
             style: priceChangePercentage24H.toString().startsWith("-")
                 ? GoogleFonts.titilliumWeb(
                     fontWeight: FontWeight.w700, color: negative)
                 : GoogleFonts.titilliumWeb(
-                    fontWeight: FontWeight.w700,
-                    color: positive),
+                    fontWeight: FontWeight.w700, color: positive),
           ),
         ],
       ),
