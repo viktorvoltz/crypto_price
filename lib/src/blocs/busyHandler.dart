@@ -9,12 +9,23 @@ class BusyHandler extends ChangeNotifier{
   User? _user;
   bool _isbusy = false;
   bool _refStatus = true;
+  List<CoinGecko> starredList = [];
 
   bool get isbusy => _isbusy;
   bool get refStatus => _refStatus;
 
   void refreshStatus(){
     _refStatus = !_refStatus;
+    notifyListeners();
+  }
+
+  void addToStarredList(CoinGecko item){
+    starredList.add(item);
+    notifyListeners();
+  }
+
+  void removeFromStarredList(CoinGecko item){
+    starredList.remove(item);
     notifyListeners();
   }
 
