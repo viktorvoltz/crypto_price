@@ -9,22 +9,15 @@ class StarredCrypto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
+    var starredList = busyHandler.getList();
     return Scaffold(
-      body: FutureBuilder<List<CoinGecko>>(
-        future: busyHandler.getStarredList(),
-        builder: (context, snapshot) {
-          if(snapshot.hasData){
-            return ListView.builder(
-            itemCount: snapshot.data!.length,
+      body: ListView.builder(
+            itemCount: starredList.length,
             itemBuilder: (context, index){
               return ListTile(
-                title: Text(snapshot.data![index].name.toString()),
+                title: Text(starredList[index].name.toString()),
               );
-          });
-          }
-          return Container();
-        }
-      ),
+          })
     );
   }
 }
