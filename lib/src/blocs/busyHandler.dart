@@ -10,7 +10,7 @@ class BusyHandler extends ChangeNotifier{
   User? _user;
   bool _isbusy = false;
   bool _refStatus = true;
-  final List<CoinGecko> _starredList = [];
+  List<CoinGecko> _starredList = [];
 
   bool get isbusy => _isbusy;
   bool get refStatus => _refStatus;
@@ -21,6 +21,16 @@ class BusyHandler extends ChangeNotifier{
     notifyListeners();
   }
 
+  List<CoinGecko> getList(){
+    List<CoinGecko> list = _starredList.where((element) => element.isFavourited == true) as List<CoinGecko>;
+    return list;
+  }
+
+
+  void setList(List<CoinGecko> list){
+    _starredList = list;
+  }
+
   Future<List<CoinGecko>> getStarredList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String list = prefs.getString("fav_coins") ?? "null";
@@ -28,7 +38,7 @@ class BusyHandler extends ChangeNotifier{
     return coinList;
   }
 
-  void addToStarredList(CoinGecko item) async{
+  void addToStarredList(CoinGecko item, int integer) async{
     _starredList.add(item);
     notifyListeners();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -36,9 +46,9 @@ class BusyHandler extends ChangeNotifier{
     await prefs.setString("fav_coins", stringData);
   }
 
-  void removeFromStarredList(CoinGecko item){
-    _starredList.remove(item);
-    notifyListeners();
+  void removeFromStarredList(int item)async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove("fav_coins");
   }
 
   Future<void> bSigninWithGoogle(BuildContext context) async {
