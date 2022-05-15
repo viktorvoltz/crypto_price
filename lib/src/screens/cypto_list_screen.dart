@@ -86,16 +86,16 @@ class _CryptoListState extends State<CryptoList> {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          busyHandler.refreshStatus();
-                          bloc.refreshData();
-                        },
-                        child: const Text("Try Again"),
-                      ),
                       busyHandler.refStatus
-                          ? const Center(child: CircularProgressIndicator())
-                          : Container(),
+                          ? TextButton(
+                              onPressed: () {
+                                busyHandler.refreshStatus();
+                                bloc.refreshData();
+                                
+                              },
+                              child: const Text("Try Again"),
+                            )
+                          : const Center(child: CircularProgressIndicator()),
                     ],
                   ),
                 );
