@@ -47,6 +47,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   @override
   Widget build(BuildContext context) {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
+    busyHandler.setList(widget.snapshot!.data!);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
@@ -65,13 +66,13 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           true);
-                      busyHandler.addToStarredList(widget.snapshot!.data![widget.index!]);
+                      busyHandler.addToStarredList(widget.snapshot!.data![widget.index!], widget.index!);
                     }
                     if (widget.snapshot!.data![widget.index!].isFavourited == true) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           false);
-                      busyHandler.removeFromStarredList(widget.snapshot!.data![widget.index!]);
+                      busyHandler.removeFromStarredList(widget.index!);
                     }
                     widget.snapshot!.data![widget.index!].isFavourited =
                         !widget.snapshot!.data![widget.index!].isFavourited;
