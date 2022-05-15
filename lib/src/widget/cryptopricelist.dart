@@ -66,13 +66,13 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           true);
-                      busyHandler.addToStarredList(widget.snapshot!.data![widget.index!], widget.index!);
+                      //busyHandler.addToStarredList(widget.snapshot!.data![widget.index!], widget.index!);
                     }
                     if (widget.snapshot!.data![widget.index!].isFavourited == true) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           false);
-                      busyHandler.removeFromStarredList(widget.index!);
+                      //busyHandler.removeFromStarredList(widget.index!);
                     }
                     widget.snapshot!.data![widget.index!].isFavourited =
                         !widget.snapshot!.data![widget.index!].isFavourited;
