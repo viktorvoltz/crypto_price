@@ -5,6 +5,7 @@ import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/utils/constants.dart';
+import 'package:coingecko/src/widget/price_change.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -134,37 +135,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             ')',
         overflow: TextOverflow.clip,
       ),
-      trailing: priceChange(),
-    );
-  }
-
-  Widget priceChange() {
-    String priceChangePercentage24H = widget
-        .snapshot!.data![widget.index!].priceChangePercentage24H
-        .toString();
-    return Container(
-      width: 95,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Icon(
-            priceChangePercentage24H.startsWith("-")
-                ? Icons.arrow_drop_down
-                : Icons.arrow_drop_up,
-            color:
-                priceChangePercentage24H.startsWith("-") ? negative : positive,
-          ),
-          Text(
-            "${widget.snapshot!.data![widget.index!].priceChangePercentage24H!.toStringAsFixed(3)}  %",
-            overflow: TextOverflow.clip,
-            style: priceChangePercentage24H.toString().startsWith("-")
-                ? GoogleFonts.titilliumWeb(
-                    fontWeight: FontWeight.w700, color: negative)
-                : GoogleFonts.titilliumWeb(
-                    fontWeight: FontWeight.w700, color: positive),
-          ),
-        ],
-      ),
+      trailing: PriceChange(data: widget.snapshot!.data!, index: widget.index),
     );
   }
 }
