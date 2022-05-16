@@ -1,13 +1,8 @@
 import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
-import 'package:coingecko/src/screens/authscreen.dart';
-import 'package:coingecko/src/services/httpStatus.dart';
-import 'package:coingecko/src/utils/authentication.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:coingecko/src/widget/drawer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
