@@ -13,7 +13,6 @@ class BusyHandler extends ChangeNotifier {
 
   bool get isbusy => _isbusy;
   bool get refStatus => _refStatus;
-  List<CoinGecko> get starredList => _starredList;
 
   void refreshStatus() {
     _refStatus = !_refStatus;
@@ -21,9 +20,6 @@ class BusyHandler extends ChangeNotifier {
   }
 
   List<CoinGecko> getList() {
-    //var list = _starredList.where((element) => element.isFavourited == true);
-    //return list.toList();
-    print(_starredList);
     return _starredList;
   }
 
@@ -32,10 +28,7 @@ class BusyHandler extends ChangeNotifier {
     List<CoinGecko> _try = list
         .where((element) => prefs.getBool('fav${element.id}') == true)
         .toList();
-    //notifyListeners();
-    //_starredList = list;
     _starredList = _try;
-    print("sss$_starredList");
   }
 
   Future<void> bSigninWithGoogle(BuildContext context) async {
