@@ -48,7 +48,7 @@ class DrawerItem extends StatelessWidget {
               color: Colors.black,
             ),
             title: const Text(
-              "Starred Items",
+              "Starred Assets",
               style: TextStyle(
                 fontSize: 18,
               ),
