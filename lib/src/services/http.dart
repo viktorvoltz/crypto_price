@@ -23,6 +23,7 @@ class CoinGeckoData {
         response: coinGeckoFromJson(jsonData),
       );
       print('loading from cache');
+      // delete cache data after one minute of loading
       Future.delayed(const Duration(minutes: 1), () async {
         await file.delete();
       });
@@ -45,12 +46,10 @@ class CoinGeckoData {
             response: coinGeckoFromJson(response.body),
           );
         }
-        //} on HttpException {
-        //return Failure(code: 101, response: 'No Internet');
       } on FormatException {
         return Failure(code: 102, response: 'Invalid Format');
       } catch (e) {
-        //return Failure(code: 103, response: 'Invalid Response');
+        // automatic refresh if initial api call fails
         if (_getRequestSuccess == false) retryFuture(getData, 2000);
       }
     }
@@ -63,6 +62,7 @@ class CoinGeckoData {
     });
   }
 
+  /// dedicated method for refreshing api data.
   static Future<Object> refreshData() async {
     try {
       final response = await http.get(Uri.parse(API_KEY));
