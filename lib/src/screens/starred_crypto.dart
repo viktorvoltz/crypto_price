@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coingecko/src/blocs/busyHandler.dart';
+import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/utils/constants.dart';
 import 'package:coingecko/src/widget/price_change.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,17 @@ class StarredCrypto extends StatelessWidget {
                     ),
                   ),
                 ),
-                title: Text(starredList[index].name.toString()),
+                title: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return CryptoDetail(
+                        detail: starredList[index],
+                      );
+                    }));
+                  },
+                  child: Text(starredList[index].name.toString()),
+                ),
                 subtitle: Text(
                   '\$' +
                       starredList[index].currentPrice.toString() +
@@ -51,7 +62,10 @@ class StarredCrypto extends StatelessWidget {
                       ')',
                   overflow: TextOverflow.clip,
                 ),
-                trailing: PriceChange(data: starredList, index: index,),
+                trailing: PriceChange(
+                  data: starredList,
+                  index: index,
+                ),
               );
             }));
   }
