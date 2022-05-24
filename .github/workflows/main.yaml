@@ -3,10 +3,9 @@ name: Build, Test and Deploy
 on: [push]
 
 jobs:
-  build_deploy:
+  build:
 
     runs-on: ubuntu-latest
-    needs: [drive_android]
 
     name: Build APK
     steps:
@@ -20,7 +19,12 @@ jobs:
         with:
           java-version: '12.x'
 
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.10.0'
+
       - run: flutter pub get
+      - run: flutter test
       - run: flutter build apk --debug --split-per-abi
 
       - name: create a release APK
