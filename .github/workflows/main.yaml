@@ -1,0 +1,30 @@
+name: Build, Test and Deploy
+
+on: [push]
+
+jobs:
+  build_deploy:
+
+    runs-on: ubuntu-latest
+    needs: [drive_android]
+
+    name: Build APK
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action
+        with:
+          flutter-version: '2.10.0'
+          channel: 'stable'
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - run: flutter pub get
+      - run: flutter build apk --debug --split-per-abi
+
+      - name: create a release APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/debug/*.apk"
+          token: ${{ secrets.TOKEN }}
