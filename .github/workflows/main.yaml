@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    if: github.event_name != 'push'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     name: Build APK
