@@ -11,7 +11,7 @@ jobs:
     name: Build APK
     steps:
       - uses: actions/checkout@v1
-      - uses: subosito/flutter-action
+      - uses: actions/setup-java@v1
         with:
           flutter-version: '2.10.0'
           channel: 'stable'
