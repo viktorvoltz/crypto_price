@@ -1,13 +1,10 @@
 name: Build, Test and Deploy
 
-on:
-  push:
-    tags:
-      - '*'
+on: [push]
 
 jobs:
   build:
-
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
 
     name: Build APK
