@@ -15,7 +15,7 @@ class StarredCrypto extends StatelessWidget {
     var starredList = busyHandler.getList();
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Starred Assets"),
+          title: Text("${starredList.length} Starred Assets"),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
