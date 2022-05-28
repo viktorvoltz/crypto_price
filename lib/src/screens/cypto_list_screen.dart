@@ -40,6 +40,7 @@ class _CryptoListState extends State<CryptoList> {
         title: Text(
           "Crypto price List",
           style: GoogleFonts.titilliumWeb(color: Colors.black),
+          overflow: TextOverflow.fade,
         ),
         backgroundColor: Colors.white,
         actions: [
