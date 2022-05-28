@@ -1,5 +1,6 @@
-import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:flutter/material.dart';
+
+import 'package:coingecko/src/model/coingeckoModel.dart';
 
 class CryptoDetail extends StatefulWidget {
   final CoinGecko? detail;

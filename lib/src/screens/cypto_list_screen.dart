@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
 import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:coingecko/src/widget/drawer.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+
 
 class CryptoList extends StatefulWidget {
   const CryptoList({Key? key}) : super(key: key);
