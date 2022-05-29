@@ -16,7 +16,7 @@ class DrawerWidget extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                //color: Colors.white,
               ),
               child: Column(
                 children: <Widget>[
@@ -35,7 +35,7 @@ class DrawerWidget extends StatelessWidget {
                     FirebaseAuth.instance.currentUser!.displayName!,
                     style: const TextStyle(
                         fontSize: 20,
-                        color: Colors.black,
+                        //color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 5),
@@ -43,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
                     FirebaseAuth.instance.currentUser!.email!,
                     style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.black,
+                        //color: Colors.black,
                         fontWeight: FontWeight.normal),
                   ),
                 ],
