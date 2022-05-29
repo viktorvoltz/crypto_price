@@ -1,14 +1,17 @@
 import 'package:coingecko/src/blocs/coingecko_bloc.dart';
+import 'package:coingecko/src/blocs/theme_provider.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/screens/starred_crypto.dart';
 import 'package:coingecko/src/utils/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DrawerItem extends StatelessWidget {
   const DrawerItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<ThemeProvider>(context);
     return Column(
       children: [
         ListTile(
@@ -43,25 +46,35 @@ class DrawerItem extends StatelessWidget {
               }
             }),
         ListTile(
-            leading: const Icon(
-              Icons.star,
-              color: Colors.black,
+          leading: const Icon(
+            Icons.star,
+            //color: Colors.black,
+          ),
+          title: const Text(
+            "Starred Assets",
+            style: TextStyle(
+              fontSize: 18,
             ),
-            title: const Text(
-              "Starred Assets",
-              style: TextStyle(
-                fontSize: 18,
+          ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const StarredCrypto();
+                },
               ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const StarredCrypto();
-                      },
-                    ),
-                  );
-            })
+            );
+          },
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Checkbox(
+            value: themeChange.darkTheme,
+            onChanged: (bool? value) {
+              themeChange.darkTheme = value!;
+            },
+          ),
+        ),
       ],
     );
   }
