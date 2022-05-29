@@ -9,7 +9,6 @@ import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:coingecko/src/widget/drawer.dart';
 
-
 class CryptoList extends StatefulWidget {
   const CryptoList({Key? key}) : super(key: key);
 
@@ -35,21 +34,21 @@ class _CryptoListState extends State<CryptoList> {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
+        //foregroundColor: Colors.black,
         elevation: 1,
-        title: Text(
+        title: const Text(
           "Crypto price List",
-          style: GoogleFonts.titilliumWeb(color: Colors.black),
+          //style: GoogleFonts.titilliumWeb(color: Colors.black),
           overflow: TextOverflow.fade,
         ),
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         actions: [
           Center(
             child: Text(
               DateFormat('EEEE, LLL dd').format(DateTime.now()),
               style: GoogleFonts.titilliumWeb(
-                color: Colors.black,
-              ),
+                  //color: Colors.black,
+                  ),
             ),
           ),
           const SizedBox(
@@ -59,7 +58,10 @@ class _CryptoListState extends State<CryptoList> {
             onPressed: () {
               showSearch(context: context, delegate: CryptoSearch());
             },
-            icon: const Icon(Icons.search, color: Colors.black),
+            icon: const Icon(
+              Icons.search,
+              ///color: Colors.black,
+            ),
           )
         ],
       ),
@@ -89,7 +91,6 @@ class _CryptoListState extends State<CryptoList> {
                               onPressed: () {
                                 busyHandler.refreshStatus();
                                 bloc.refreshData();
-                                
                               },
                               child: const Text("Try Again"),
                             )
