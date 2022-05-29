@@ -63,12 +63,14 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   setState(() {
-                    if (widget.snapshot!.data![widget.index!].isFavourited == false) {
+                    if (widget.snapshot!.data![widget.index!].isFavourited ==
+                        false) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           true);
                     }
-                    if (widget.snapshot!.data![widget.index!].isFavourited == true) {
+                    if (widget.snapshot!.data![widget.index!].isFavourited ==
+                        true) {
                       prefs.setBool(
                           "fav${widget.snapshot!.data![widget.index!].id}",
                           false);
@@ -80,10 +82,13 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                 child: Container(
                   width: double.infinity,
                   child: widget.snapshot!.data![widget.index!].isFavourited
-                      ? const Icon(Icons.star, color: Colors.black)
+                      ? const Icon(
+                          Icons.star,
+                          //color: Colors.black,
+                        )
                       : const Icon(
                           Icons.star_border,
-                          color: Colors.black,
+                          //color: Colors.black,
                         ),
                 ),
               ),
