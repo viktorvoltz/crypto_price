@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class Themes{
   static ThemeData themeData (bool isDarkTheme, BuildContext context){
     return ThemeData(
-      primarySwatch: Colors.green,
+      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.green,
       primaryColor: isDarkTheme ? Colors.black87 : Colors.white,
+
+      accentColor: isDarkTheme ? Colors.black87 : Colors.white,
 
       backgroundColor: isDarkTheme ? Colors.black : const Color(0xffF1F5FB),
 
