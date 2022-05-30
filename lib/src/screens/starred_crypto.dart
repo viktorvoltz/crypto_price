@@ -18,8 +18,8 @@ class StarredCrypto extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("${starredList.length} Starred Assets"),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          //backgroundColor: Colors.white,
+          //foregroundColor: Colors.black,
         ),
         body: ListView.builder(
             itemCount: starredList.length,
