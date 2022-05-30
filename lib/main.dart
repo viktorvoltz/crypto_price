@@ -24,32 +24,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeProvider themeProvider = new ThemeProvider();
 
-  @override
-  void initState() {
-    getCurrentTheme();
-    super.initState();
-  }
-
-  void getCurrentTheme() async {
-    themeProvider.darkTheme = await themeProvider.themePreference.getTheme();
-  }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => BusyHandler()),
-          ChangeNotifierProvider(create: (_) => themeProvider),
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (ctx, value, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Crypto App',
-              theme: Themes.themeData(themeProvider.darkTheme, context),
+              theme: value.getTheme(),
               home: GoogleSignIn().currentUser == null &&
                       FirebaseAuth.instance.currentUser == null
                   ? const AuthScreen()
