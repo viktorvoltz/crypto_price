@@ -68,11 +68,27 @@ class DrawerItem extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: Checkbox(
-            value: themeChange.darkTheme,
-            onChanged: (bool? value) {
-              themeChange.darkTheme = value!;
-            },
+          child: Column(
+            children: [
+              Container(
+                      child: FlatButton(
+                        onPressed: () => {
+                          print('Set Light Theme'),
+                          themeChange.setLightMode(),
+                        },
+                        child: Text('Set Light Theme'),
+                      ),
+                    ),
+                    Container(
+                      child: FlatButton(
+                        onPressed: () => {
+                          print('Set Dark theme'),
+                          themeChange.setDarkMode(),
+                        },
+                        child: Text('Set Dark theme'),
+                      ),
+                    ),
+            ],
           ),
         ),
       ],
