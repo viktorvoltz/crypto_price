@@ -1,6 +1,9 @@
 name: Build, Test and Deploy
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,8 +23,8 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --debug --split-per-abi
 
-      - name: create a release APK
-        uses: ncipollo/release-action@v1
+      - uses: actions/upload-artifact@v2
         with:
-          artifacts: "build/app/outputs/apk/debug/*.apk"
+          name: app-release.apk
+          path: build/app/outputs/apk/release/app-release.apk
           token: ${{ secrets.TOKEN }}
