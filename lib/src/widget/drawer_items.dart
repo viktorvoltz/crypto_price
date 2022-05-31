@@ -71,23 +71,21 @@ class DrawerItem extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                      child: FlatButton(
-                        onPressed: () => {
-                          print('Set Light Theme'),
-                          themeChange.setLightMode(),
-                        },
-                        child: Text('Set Light Theme'),
-                      ),
-                    ),
-                    Container(
-                      child: FlatButton(
-                        onPressed: () => {
-                          print('Set Dark theme'),
-                          themeChange.setDarkMode(),
-                        },
-                        child: Text('Set Dark theme'),
-                      ),
-                    ),
+                child: FlatButton(
+                  onPressed: () => {
+                    themeChange.setLightMode(),
+                  },
+                  child: const Text('Set Light Theme'),
+                ),
+              ),
+              Container(
+                child: FlatButton(
+                  onPressed: () => {
+                    themeChange.setDarkMode(),
+                  },
+                  child: const Text('Set Dark theme'),
+                ),
+              ),
             ],
           ),
         ),
