@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/crypto_list_detail.dart';
-import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/utils/constants.dart';
 import 'package:coingecko/src/widget/price_change.dart';
 import 'package:flutter/material.dart';
