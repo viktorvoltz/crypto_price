@@ -1,6 +1,4 @@
-import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/blocs/theme_provider.dart';
-import 'package:coingecko/src/model/themes.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:coingecko/src/utils/providers.dart';
@@ -9,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import './src/utils/authentication.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
