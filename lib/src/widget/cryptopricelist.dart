@@ -29,7 +29,6 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   void checkValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var check = prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}');
-    //print(widget.snapshot!.data![widget.index!].id);
     if (prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
             false ||
         prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
@@ -57,7 +56,6 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
               width: 25,
               child: GestureDetector(
                 onTap: () async {
-                  //busyHandler.favoriteFunc();
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   setState(() {
@@ -82,11 +80,9 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                   child: widget.snapshot!.data![widget.index!].isFavourited
                       ? const Icon(
                           Icons.star,
-                          //color: Colors.black,
                         )
                       : const Icon(
                           Icons.star_border,
-                          //color: Colors.black,
                         ),
                 ),
               ),
