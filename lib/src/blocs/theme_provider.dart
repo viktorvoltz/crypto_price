@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:coingecko/src/utils/theme_pref.dart';
 import 'package:coingecko/src/utils/theme_modes.dart';
+import 'package:coingecko/src/utils/constants.dart';
 
 class ThemeProvider extends ChangeNotifier{
 
@@ -12,7 +13,7 @@ class ThemeProvider extends ChangeNotifier{
 
   /// sets the App's theme on start up.
   Future<void> setTheme()async{
-    await ThemePreference.readData('themeMode').then((value) {
+    await ThemePreference.readData(themeMode).then((value) {
       print('value read from storage: ' + value.toString());
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
@@ -26,13 +27,13 @@ class ThemeProvider extends ChangeNotifier{
 
   void setDarkMode() async {
     _themeData = darkTheme;
-    ThemePreference.saveData('themeMode', 'dark');
+    ThemePreference.saveData(themeMode, 'dark');
     notifyListeners();
   }
 
   void setLightMode() async {
     _themeData = lightTheme;
-    ThemePreference.saveData('themeMode', 'light');
+    ThemePreference.saveData(themeMode, 'light');
     notifyListeners();
   }
 }
