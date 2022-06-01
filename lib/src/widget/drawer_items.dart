@@ -48,7 +48,6 @@ class DrawerItem extends StatelessWidget {
         ListTile(
           leading: const Icon(
             Icons.star,
-            //color: Colors.black,
           ),
           title: const Text(
             "Starred Assets",
@@ -70,21 +69,33 @@ class DrawerItem extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Column(
             children: [
-              Container(
-                child: FlatButton(
-                  onPressed: () => {
-                    themeChange.setLightMode(),
-                  },
-                  child: const Text('Set Light Theme'),
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.light_mode),
+                  Container(
+                    child: FlatButton(
+                      onPressed: () => {
+                        themeChange.setLightMode(),
+                      },
+                      child: const Text('Set Light Theme'),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                child: FlatButton(
-                  onPressed: () => {
-                    themeChange.setDarkMode(),
-                  },
-                  child: const Text('Set Dark theme'),
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.dark_mode),
+                  Container(
+                    child: FlatButton(
+                      onPressed: () => {
+                        themeChange.setDarkMode(),
+                      },
+                      child: const Text('Set Dark theme'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
