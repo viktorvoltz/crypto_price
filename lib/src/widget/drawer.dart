@@ -1,6 +1,3 @@
-import 'package:coingecko/src/blocs/coingecko_bloc.dart';
-import 'package:coingecko/src/screens/authscreen.dart';
-import 'package:coingecko/src/utils/authentication.dart';
 import 'package:coingecko/src/widget/drawer_items.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +13,6 @@ class DrawerWidget extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: const BoxDecoration(
-                //color: Colors.white,
               ),
               child: Column(
                 children: <Widget>[
@@ -35,7 +31,6 @@ class DrawerWidget extends StatelessWidget {
                     FirebaseAuth.instance.currentUser!.displayName!,
                     style: const TextStyle(
                         fontSize: 20,
-                        //color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 5),
@@ -43,7 +38,6 @@ class DrawerWidget extends StatelessWidget {
                     FirebaseAuth.instance.currentUser!.email!,
                     style: const TextStyle(
                         fontSize: 16,
-                        //color: Colors.black,
                         fontWeight: FontWeight.normal),
                   ),
                 ],
