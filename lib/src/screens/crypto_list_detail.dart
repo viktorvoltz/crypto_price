@@ -44,9 +44,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                 value: widget.detail!.currentPrice!,
                 max: widget.detail!.ath!,
                 min: widget.detail!.atl!,
-                onChanged: (double value){
-                  
-                },
+                onChanged: (double value){},
                 label: widget.detail!.currentPrice.toString(),
               ),
             )
