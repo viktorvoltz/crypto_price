@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       builder: (ctx, value, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Crypto App',
+          title: 'Crypto Price',
           theme: value.getTheme(),
           home: GoogleSignIn().currentUser == null &&
                   FirebaseAuth.instance.currentUser == null
