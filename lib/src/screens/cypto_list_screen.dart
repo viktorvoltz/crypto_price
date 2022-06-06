@@ -74,8 +74,6 @@ class _CryptoListState extends State<CryptoList> {
               if (snapshot.hasData) {
                 return coinList(snapshot);
               } else if (snapshot.hasError) {
-                print("failed to refresh");
-                //bloc.getCoinData();
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
