@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:coingecko/src/services/http.dart';
@@ -13,6 +14,7 @@ class CoingeckoBloc {
   Failure? _error;
   Failure? get error => _error;
   final _coinDataFetcher = PublishSubject<List<CoinGecko>>();
+  BusyHandler busyHandler = BusyHandler();
 
   List<CoinGecko> _coinList = [];
   List<CoinGecko>? get coinList => _coinList;
@@ -77,11 +79,12 @@ class CoingeckoBloc {
 
       setCoinList(_coinList);
     } else if (response is Failure) {
+      busyHandler.refreshStatus();
       Failure error = Failure(code: response.code, response: response.response);
       setError(error);
     }
     }on SocketException{
-      print("FAILED REF");
+      busyHandler.refreshStatus();
       _error = Failure(code: 500, response: "No internet connection");
       _coinDataFetcher.sink.addError(_error!);
     }
