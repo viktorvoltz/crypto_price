@@ -34,20 +34,16 @@ class _CryptoListState extends State<CryptoList> {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     return Scaffold(
       appBar: AppBar(
-        //foregroundColor: Colors.black,
         elevation: 1,
         title: const Text(
           "Crypto price List",
-          //style: GoogleFonts.titilliumWeb(color: Colors.black),
           overflow: TextOverflow.fade,
         ),
-        //backgroundColor: Colors.white,
         actions: [
           Center(
             child: Text(
               DateFormat('EEEE, LLL dd').format(DateTime.now()),
               style: GoogleFonts.titilliumWeb(
-                  //color: Colors.black,
                   ),
             ),
           ),
@@ -60,7 +56,6 @@ class _CryptoListState extends State<CryptoList> {
             },
             icon: const Icon(
               Icons.search,
-              ///color: Colors.black,
             ),
           )
         ],
