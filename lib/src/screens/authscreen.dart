@@ -29,7 +29,6 @@ class AuthScreen extends StatelessWidget {
                   const SizedBox(width: 5,),
                   TextButton(
                     onPressed: () async {
-                      //await bloc.bSigninWithGoogle(context);
                       await busyHandler.bSigninWithGoogle(context);
                     },
                     child: const Text(
