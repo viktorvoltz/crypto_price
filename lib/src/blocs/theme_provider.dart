@@ -14,7 +14,6 @@ class ThemeProvider extends ChangeNotifier{
   /// sets the App's theme on start up.
   Future<void> setTheme()async{
     await ThemePreference.readData(themeMode).then((value) {
-      print('value read from storage: ' + value.toString());
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
         _themeData = lightTheme;
