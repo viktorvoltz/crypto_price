@@ -81,9 +81,9 @@ class _CryptoListState extends State<CryptoList> {
                       ),
                       busyHandler.refStatus
                           ? TextButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 busyHandler.refreshStatus();
-                                bloc.refreshData();
+                                await bloc.refreshData();
                               },
                               child: const Text("Try Again"),
                             )
