@@ -83,6 +83,7 @@ class CoingeckoBloc {
         busyHandler.refreshStatus();
         Failure error =
             Failure(code: response.code, response: response.response);
+        _coinDataFetcher.sink.addError(error);
         setError(error);
       }
     } on SocketException {
