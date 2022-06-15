@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:coingecko/src/model/chart_data.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/utils/constants.dart';
 import 'package:http/http.dart' as http;
@@ -75,9 +76,24 @@ class CoinGeckoData {
           mode: FileMode.write,
         );
 
-         return Success(
-            response: coinGeckoFromJson(response.body),
-          );
+        return Success(
+          response: coinGeckoFromJson(response.body),
+        );
+      }
+    } on HttpException {
+      return Failure(code: 101, response: "No internet");
+    }
+    return Failure(code: 100, response: 'Invalid Response');
+  }
+
+  /// get chart data.
+  static Future<Object> chartData({String id = "bitcoin"}) async {
+    try {
+      final response = await http.get(
+          Uri.parse(apiChartKey + id + '/market_chart?vs_currency=usd&days=1'));
+
+      if (response.statusCode == 200) {
+        return chartDataFromJson(response.body);
       }
     } on HttpException {
       return Failure(code: 101, response: "No internet");
