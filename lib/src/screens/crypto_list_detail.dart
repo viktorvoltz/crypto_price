@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:coingecko/src/model/chart_data.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/utils/constants.dart';
@@ -17,6 +19,10 @@ class CryptoDetail extends StatefulWidget {
 class _CryptoDetailState extends State<CryptoDetail> {
   @override
   Widget build(BuildContext context) {
+    final List<Color> gradientColors = <Color>[
+      widget.detail!.priceChangePercentage24H! < 0 ? Colors.redAccent : Colors.greenAccent,
+      widget.detail!.priceChangePercentage24H! < 0 ? const Color.fromARGB(255, 245, 206, 206) : const Color.fromARGB(255, 189, 241, 191),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.detail!.name.toString()),
@@ -26,7 +32,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 20),
-              height: 200,
+              height: 400,
               child: FutureBuilder<ChartData>(
                   future: CoinGeckoData.chartData(id: widget.detail!.id!),
                   builder: (context, snapshot) {
@@ -35,6 +41,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                         LineChartData(
                           lineBarsData: [
                             LineChartBarData(
+                              barWidth: 0.7,
                               spots: snapshot.data!.prices!
                                   .map((point) => FlSpot(point[0], point[1]))
                                   .toList(),
@@ -42,6 +49,14 @@ class _CryptoDetailState extends State<CryptoDetail> {
                               dotData: FlDotData(
                                 show: false,
                               ),
+                              belowBarData: BarAreaData(
+                                show: true,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: gradientColors
+                                ),
+                              )
                             ),
                           ],
                           gridData: FlGridData(
@@ -67,10 +82,29 @@ class _CryptoDetailState extends State<CryptoDetail> {
                             },
                           ),
                           titlesData: FlTitlesData(
-                            rightTitles: AxisTitles(
+                            leftTitles: AxisTitles(
                                 sideTitles: SideTitles(showTitles: false)),
                             topTitles: AxisTitles(
                                 sideTitles: SideTitles(showTitles: false)),
+                            bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                reservedSize: 60,
+                                showTitles: true,
+                                /*getTitlesWidget: (double tr, TitleMeta yu) =>
+                                    Container(
+                                  width: double.infinity,
+                                  color: Colors.red,
+                                  child: Text(
+                                    tr.toString(),
+                                    style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),*/
+                              ),
+                            ),
                           ),
                           borderData: FlBorderData(
                             show: false,
@@ -87,7 +121,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                         child: const Text("loading chart"),
                       );
                     }
-                    return const Text("Error loading chart");
+                    return const Center(child: Text("Error loading chart"));
                   }),
             ),
             Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
