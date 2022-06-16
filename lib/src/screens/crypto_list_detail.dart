@@ -1,6 +1,10 @@
+import 'package:coingecko/src/model/chart_data.dart';
+import 'package:coingecko/src/services/http.dart';
+import 'package:coingecko/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class CryptoDetail extends StatefulWidget {
   final CoinGecko? detail;
@@ -20,6 +24,72 @@ class _CryptoDetailState extends State<CryptoDetail> {
       body: Center(
         child: Column(
           children: [
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              height: 200,
+              child: FutureBuilder<ChartData>(
+                  future: CoinGeckoData.chartData(id: widget.detail!.id!),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return LineChart(
+                        LineChartData(
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: snapshot.data!.prices!
+                                  .map((point) => FlSpot(point[0], point[1]))
+                                  .toList(),
+                              isCurved: false,
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                            ),
+                          ],
+                          gridData: FlGridData(
+                            show: false,
+                            drawVerticalLine: true,
+                            getDrawingHorizontalLine: (double value) {
+                              return FlLine(
+                                color:
+                                    widget.detail!.priceChangePercentage24H! < 0
+                                        ? negative
+                                        : positive,
+                                strokeWidth: 1,
+                              );
+                            },
+                            getDrawingVerticalLine: (double value) {
+                              return FlLine(
+                                color:
+                                    widget.detail!.priceChangePercentage24H! < 0
+                                        ? negative
+                                        : positive,
+                                strokeWidth: 1,
+                              );
+                            },
+                          ),
+                          titlesData: FlTitlesData(
+                            rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                          ),
+                          borderData: FlBorderData(
+                            show: false,
+                          ),
+                        ),
+                        swapAnimationCurve: Curves.linear,
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        alignment: Alignment.center,
+                        height: 30,
+                        width: double.infinity,
+                        child: const Text("loading chart"),
+                      );
+                    }
+                    return const Text("Error loading chart");
+                  }),
+            ),
             Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
             Text("total volume: \$${widget.detail!.totalVolume.toString()}"),
             Row(
@@ -44,7 +114,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                 value: widget.detail!.currentPrice!,
                 max: widget.detail!.ath!,
                 min: widget.detail!.atl!,
-                onChanged: (double value){},
+                onChanged: (double value) {},
                 label: widget.detail!.currentPrice.toString(),
               ),
             )
