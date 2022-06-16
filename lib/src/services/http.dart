@@ -87,7 +87,7 @@ class CoinGeckoData {
   }
 
   /// get chart data.
-  static Future<Object> chartData({String id = "bitcoin"}) async {
+  static Future<ChartData> chartData({String id = "bitcoin"}) async {
     try {
       final response = await http.get(
           Uri.parse(apiChartKey + id + '/market_chart?vs_currency=usd&days=1'));
@@ -96,8 +96,10 @@ class CoinGeckoData {
         return chartDataFromJson(response.body);
       }
     } on HttpException {
-      return Failure(code: 101, response: "No internet");
+      //return Failure(code: 101, response: "No internet");
+      return ChartData();
     }
-    return Failure(code: 100, response: 'Invalid Response');
+    //return Failure(code: 100, response: 'Invalid Response');
+    return ChartData();
   }
 }
