@@ -27,10 +27,19 @@ class _CryptoDetailState extends State<CryptoDetail> {
       appBar: AppBar(
         title: Text(widget.detail!.name.toString()),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(widget.detail!.currentPrice.toString(), 
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: widget.detail!.priceChangePercentage24H! < 0 ? negative : positive
+              )),
+            ),
             Container(
               margin: const EdgeInsets.only(top: 20),
               height: 400,
