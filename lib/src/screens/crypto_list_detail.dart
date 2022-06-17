@@ -20,8 +20,8 @@ class _CryptoDetailState extends State<CryptoDetail> {
   @override
   Widget build(BuildContext context) {
     final List<Color> gradientColors = <Color>[
-      widget.detail!.priceChangePercentage24H! < 0 ? Colors.redAccent : Colors.greenAccent,
-      widget.detail!.priceChangePercentage24H! < 0 ? const Color.fromARGB(255, 245, 206, 206) : const Color.fromARGB(255, 189, 241, 191),
+       const Color.fromARGB(255, 159, 204, 241),
+       const Color.fromARGB(255, 241, 244, 245)
     ];
     return Scaffold(
       appBar: AppBar(
@@ -29,6 +29,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
       ),
       body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: const EdgeInsets.only(top: 20),
@@ -50,7 +51,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                                 show: false,
                               ),
                               belowBarData: BarAreaData(
-                                show: true,
+                                show: false,
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -92,17 +93,15 @@ class _CryptoDetailState extends State<CryptoDetail> {
                               sideTitles: SideTitles(
                                 reservedSize: 60,
                                 showTitles: true,
-                                /*getTitlesWidget: (double tr, TitleMeta yu) =>
+                                getTitlesWidget: (double tr, TitleMeta yu) =>
                                     Container(
-                                  width: double.infinity,
-                                  color: Colors.red,
                                   child: Text(
-                                    tr.toString(),
+                                    tr.toStringAsFixed(2),
                                     style: const TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                ),*/
+                                ),
                               ),
                             ),
                           ),
@@ -124,6 +123,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                     return const Center(child: Text("Error loading chart"));
                   }),
             ),
+            const SizedBox(height: 20,),
             Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
             Text("total volume: \$${widget.detail!.totalVolume.toString()}"),
             Row(
