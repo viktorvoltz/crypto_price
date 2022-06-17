@@ -47,6 +47,8 @@ class CoinGeckoData {
             response: coinGeckoFromJson(response.body),
           );
         }
+      } on HandshakeException {
+        return Failure(code: 100, response: "Connection dropped");
       } on FormatException {
         return Failure(code: 102, response: 'Invalid Format');
       } catch (e) {
@@ -80,6 +82,8 @@ class CoinGeckoData {
           response: coinGeckoFromJson(response.body),
         );
       }
+    } on HandshakeException {
+      return Failure(code: 100, response: "Connection terminated");
     } on HttpException {
       return Failure(code: 101, response: "No internet");
     }
