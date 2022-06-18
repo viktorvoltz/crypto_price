@@ -33,11 +33,10 @@ class _CryptoDetailState extends State<CryptoDetail> {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(widget.detail!.currentPrice.toString(), 
-              style: TextStyle(
+              child: Text("\$${widget.detail!.currentPrice.toString()}", 
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
-                color: widget.detail!.priceChangePercentage24H! < 0 ? negative : positive
               )),
             ),
             Container(
