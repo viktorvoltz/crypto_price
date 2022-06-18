@@ -25,14 +25,14 @@ class _CryptoDetailState extends State<CryptoDetail> {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.detail!.name.toString()),
+        title: Text(widget.detail!.symbol.toString().toUpperCase() + " / USD"),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10, top: 10),
               child: Text("\$${widget.detail!.currentPrice.toString()}", 
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
