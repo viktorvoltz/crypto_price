@@ -125,7 +125,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                         alignment: Alignment.center,
                         height: 30,
                         width: double.infinity,
-                        child: const Text("loading chart"),
+                        child: const CircularProgressIndicator(),
                       );
                     }
                     return const Center(child: Text("Error loading chart"));
