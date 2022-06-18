@@ -48,7 +48,7 @@ class CoinGeckoData {
           );
         }
       } on HandshakeException {
-        return Failure(code: 100, response: "Connection dropped");
+        return Failure(code: 100, response: "Connection Interuption");
       } on FormatException {
         return Failure(code: 102, response: 'Invalid Format');
       } catch (e) {
@@ -83,7 +83,7 @@ class CoinGeckoData {
         );
       }
     } on HandshakeException {
-      return Failure(code: 100, response: "Connection terminated");
+      return Failure(code: 100, response: "Connection Interuption");
     } on HttpException {
       return Failure(code: 101, response: "No internet");
     }
