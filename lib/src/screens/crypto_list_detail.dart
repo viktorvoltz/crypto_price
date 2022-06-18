@@ -20,8 +20,8 @@ class _CryptoDetailState extends State<CryptoDetail> {
   @override
   Widget build(BuildContext context) {
     final List<Color> gradientColors = <Color>[
-       const Color.fromARGB(255, 159, 204, 241),
-       const Color.fromARGB(255, 241, 244, 245)
+      const Color.fromARGB(255, 159, 204, 241),
+      const Color.fromARGB(255, 241, 244, 245)
     ];
     return Scaffold(
       appBar: AppBar(
@@ -33,11 +33,31 @@ class _CryptoDetailState extends State<CryptoDetail> {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
-              child: Text("\$${widget.detail!.currentPrice.toString()}", 
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              )),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "\$${widget.detail!.currentPrice.toString()}",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.detail!.priceChangePercentage24H.toString() + "%",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: widget.detail!.priceChangePercentage24H! < 0
+                          ? negative
+                          : positive,
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               margin: const EdgeInsets.only(top: 20),
@@ -50,23 +70,21 @@ class _CryptoDetailState extends State<CryptoDetail> {
                         LineChartData(
                           lineBarsData: [
                             LineChartBarData(
-                              barWidth: 0.7,
-                              spots: snapshot.data!.prices!
-                                  .map((point) => FlSpot(point[0], point[1]))
-                                  .toList(),
-                              isCurved: false,
-                              dotData: FlDotData(
-                                show: false,
-                              ),
-                              belowBarData: BarAreaData(
-                                show: false,
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: gradientColors
+                                barWidth: 0.7,
+                                spots: snapshot.data!.prices!
+                                    .map((point) => FlSpot(point[0], point[1]))
+                                    .toList(),
+                                isCurved: false,
+                                dotData: FlDotData(
+                                  show: false,
                                 ),
-                              )
-                            ),
+                                belowBarData: BarAreaData(
+                                  show: false,
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: gradientColors),
+                                )),
                           ],
                           gridData: FlGridData(
                             show: false,
@@ -131,7 +149,9 @@ class _CryptoDetailState extends State<CryptoDetail> {
                     return const Center(child: Text("Error loading chart"));
                   }),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
             Text("total volume: \$${widget.detail!.totalVolume.toString()}"),
             Row(
