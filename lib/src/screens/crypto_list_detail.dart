@@ -152,8 +152,14 @@ class _CryptoDetailState extends State<CryptoDetail> {
             const SizedBox(
               height: 20,
             ),
-            Text("Market Cap: \$${widget.detail!.marketCap.toString()}"),
-            Text("total volume: \$${widget.detail!.totalVolume.toString()}"),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text("High: \$${widget.detail!.high24H.toString()}"),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text("Low: \$${widget.detail!.low24H.toString()}"),
+            ),
             Row(
               children: [
                 Padding(
@@ -167,7 +173,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                 ),
               ],
             ),
-            SliderTheme(
+            /*SliderTheme(
               data: const SliderThemeData(
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0),
                 showValueIndicator: ShowValueIndicator.always,
@@ -179,7 +185,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                 onChanged: (double value) {},
                 label: widget.detail!.currentPrice.toString(),
               ),
-            )
+            )*/
           ],
         ),
       ),
