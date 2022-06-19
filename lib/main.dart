@@ -13,10 +13,12 @@ void main() async {
   await Firebase.initializeApp();
   ThemeProvider themeProvider = ThemeProvider();
   await themeProvider.setTheme();
-  runApp(MultiProvider(
-    providers: providers,
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: providers,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
