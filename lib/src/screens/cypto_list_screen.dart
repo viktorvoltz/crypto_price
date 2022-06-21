@@ -1,3 +1,4 @@
+import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -138,14 +139,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(coindata.name!),
-        Text(coindata.priceChange24H!.toString()),
-      ],
-    ));
+    return CryptoDetail(detail: coindata);
   }
 
   @override
