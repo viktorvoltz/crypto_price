@@ -166,6 +166,7 @@ class CryptoSearch extends SearchDelegate<CoinGecko> {
                           showResults(context);
                         },
                         title: Text(itemList[index].name!),
+                        subtitle: Text(itemList[index].symbol!.toUpperCase()),
                       )
                     ],
                   ));
