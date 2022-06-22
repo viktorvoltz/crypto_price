@@ -155,13 +155,16 @@ class _CryptoDetailState extends State<CryptoDetail> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text("High: \$${widget.detail!.high24H.toString()}"),
+              child: Text("High: ${widget.detail!.high24H.toString()}"),
+            ),
+            const SizedBox(
+              height: 5,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text("Low: \$${widget.detail!.low24H.toString()}"),
+              child: Text("Low: ${widget.detail!.low24H.toString()}"),
             ),
-            Row(
+            /*Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
@@ -173,7 +176,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
                   child: Text("ATH: ${widget.detail!.ath.toString()}"),
                 ),
               ],
-            ),
+            ),*/
             /*SliderTheme(
               data: const SliderThemeData(
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0),
