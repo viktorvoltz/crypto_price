@@ -46,14 +46,17 @@ class _CryptoDetailState extends State<CryptoDetail> {
                   const SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    widget.detail!.priceChangePercentage24H.toString() + "%",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: widget.detail!.priceChangePercentage24H! < 0
-                          ? negative
-                          : positive,
-                      fontSize: 10,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      widget.detail!.priceChangePercentage24H.toString() + "%",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: widget.detail!.priceChangePercentage24H! < 0
+                            ? negative
+                            : positive,
+                        fontSize: 10,
+                      ),
                     ),
                   ),
                 ],
