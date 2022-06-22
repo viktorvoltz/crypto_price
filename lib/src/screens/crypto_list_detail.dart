@@ -70,21 +70,22 @@ class _CryptoDetailState extends State<CryptoDetail> {
                         LineChartData(
                           lineBarsData: [
                             LineChartBarData(
-                                barWidth: 0.7,
-                                spots: snapshot.data!.prices!
-                                    .map((point) => FlSpot(point[0], point[1]))
-                                    .toList(),
-                                isCurved: false,
-                                dotData: FlDotData(
-                                  show: false,
-                                ),
-                                belowBarData: BarAreaData(
-                                  show: false,
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: gradientColors),
-                                )),
+                              barWidth: 0.7,
+                              spots: snapshot.data!.prices!
+                                  .map((point) => FlSpot(point[0], point[1]))
+                                  .toList(),
+                              isCurved: false,
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                              belowBarData: BarAreaData(
+                                show: false,
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: gradientColors),
+                              ),
+                            ),
                           ],
                           gridData: FlGridData(
                             show: false,
@@ -121,11 +122,11 @@ class _CryptoDetailState extends State<CryptoDetail> {
                                 showTitles: true,
                                 getTitlesWidget: (double tr, TitleMeta yu) =>
                                     Text(
-                                      tr.toStringAsFixed(2),
-                                      style: const TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
+                                  tr.toStringAsFixed(2),
+                                  style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
