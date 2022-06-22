@@ -91,15 +91,14 @@ class _CryptoDetailState extends State<CryptoDetail> {
                             ),
                           ],
                           gridData: FlGridData(
-                            show: false,
-                            drawVerticalLine: true,
+                            show: true,
+                            drawVerticalLine: false,
+                            drawHorizontalLine: true,
                             getDrawingHorizontalLine: (double value) {
                               return FlLine(
-                                color:
-                                    widget.detail!.priceChangePercentage24H! < 0
-                                        ? negative
-                                        : positive,
-                                strokeWidth: 1,
+                                dashArray: [2, 5],
+                                color: Colors.grey,
+                                strokeWidth: 0.2,
                               );
                             },
                             getDrawingVerticalLine: (double value) {
