@@ -120,14 +120,12 @@ class _CryptoDetailState extends State<CryptoDetail> {
                                 reservedSize: 60,
                                 showTitles: true,
                                 getTitlesWidget: (double tr, TitleMeta yu) =>
-                                    Container(
-                                  child: Text(
-                                    tr.toStringAsFixed(2),
-                                    style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
+                                    Text(
+                                      tr.toStringAsFixed(2),
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                ),
                               ),
                             ),
                           ),
