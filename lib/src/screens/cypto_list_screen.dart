@@ -9,6 +9,7 @@ import 'package:coingecko/src/blocs/coingecko_bloc.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/widget/cryptopricelist.dart';
 import 'package:coingecko/src/widget/drawer.dart';
+import 'package:coingecko/src/screens/starred_crypto.dart';
 
 class CryptoList extends StatefulWidget {
   const CryptoList({Key? key}) : super(key: key);
@@ -37,15 +38,28 @@ class _CryptoListState extends State<CryptoList> {
       appBar: AppBar(
         elevation: 1,
         title: const Text(
-          "Crypto price List",
+          "Crypto price",
           overflow: TextOverflow.fade,
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const StarredCrypto();
+                  },
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.star,
+            ),
+          ),
           Center(
             child: Text(
               DateFormat('EEEE, LLL dd').format(DateTime.now()),
-              style: GoogleFonts.titilliumWeb(
-                  ),
+              style: GoogleFonts.titilliumWeb(),
             ),
           ),
           const SizedBox(
