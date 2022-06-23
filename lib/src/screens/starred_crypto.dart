@@ -21,6 +21,11 @@ class StarredCrypto extends StatelessWidget {
       body: ListView.builder(
         itemCount: starredList.length,
         itemBuilder: (context, index) {
+          if (starredList.isEmpty) {
+            return const Center(
+              child: Text("Your favourite coins will appear here."),
+            );
+          }
           return ListTile(
             leading: SizedBox(
               width: 40,
