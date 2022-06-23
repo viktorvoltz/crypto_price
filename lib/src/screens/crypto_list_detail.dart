@@ -66,89 +66,90 @@ class _CryptoDetailState extends State<CryptoDetail> {
               margin: const EdgeInsets.only(top: 20),
               height: 400,
               child: FutureBuilder<ChartData>(
-                  future: CoinGeckoData.chartData(id: widget.detail!.id!),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return LineChart(
-                        LineChartData(
-                          lineBarsData: [
-                            LineChartBarData(
-                              barWidth: 0.7,
-                              spots: snapshot.data!.prices!
-                                  .map((point) => FlSpot(point[0], point[1]))
-                                  .toList(),
-                              isCurved: false,
-                              dotData: FlDotData(
-                                show: false,
-                              ),
-                              belowBarData: BarAreaData(
-                                show: false,
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: gradientColors),
-                              ),
+                future: CoinGeckoData.chartData(id: widget.detail!.id!),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return LineChart(
+                      LineChartData(
+                        lineBarsData: [
+                          LineChartBarData(
+                            barWidth: 0.7,
+                            spots: snapshot.data!.prices!
+                                .map((point) => FlSpot(point[0], point[1]))
+                                .toList(),
+                            isCurved: false,
+                            dotData: FlDotData(
+                              show: false,
                             ),
-                          ],
-                          gridData: FlGridData(
-                            show: true,
-                            drawVerticalLine: false,
-                            drawHorizontalLine: true,
-                            getDrawingHorizontalLine: (double value) {
-                              return FlLine(
-                                dashArray: [2, 5],
-                                color: Colors.grey,
-                                strokeWidth: 0.2,
-                              );
-                            },
-                            getDrawingVerticalLine: (double value) {
-                              return FlLine(
-                                color:
-                                    widget.detail!.priceChangePercentage24H! < 0
-                                        ? negative
-                                        : positive,
-                                strokeWidth: 1,
-                              );
-                            },
+                            belowBarData: BarAreaData(
+                              show: false,
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: gradientColors),
+                            ),
                           ),
-                          titlesData: FlTitlesData(
-                            leftTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                reservedSize: 60,
-                                showTitles: true,
-                                getTitlesWidget: (double tr, TitleMeta yu) =>
-                                    Text(
-                                  tr.toStringAsFixed(2),
-                                  style: const TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                        ],
+                        gridData: FlGridData(
+                          show: true,
+                          drawVerticalLine: false,
+                          drawHorizontalLine: true,
+                          getDrawingHorizontalLine: (double value) {
+                            return FlLine(
+                              dashArray: [2, 5],
+                              color: Colors.grey,
+                              strokeWidth: 0.2,
+                            );
+                          },
+                          getDrawingVerticalLine: (double value) {
+                            return FlLine(
+                              color:
+                                  widget.detail!.priceChangePercentage24H! < 0
+                                      ? negative
+                                      : positive,
+                              strokeWidth: 1,
+                            );
+                          },
+                        ),
+                        titlesData: FlTitlesData(
+                          leftTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          rightTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              reservedSize: 60,
+                              showTitles: true,
+                              getTitlesWidget: (double tr, TitleMeta yu) =>
+                                  Text(
+                                tr.toStringAsFixed(2),
+                                style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),
                           ),
-                          borderData: FlBorderData(
-                            show: false,
-                          ),
                         ),
-                        swapAnimationCurve: Curves.linear,
-                      );
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Container(
-                        alignment: Alignment.center,
-                        height: 30,
-                        width: double.infinity,
-                        child: const CircularProgressIndicator(),
-                      );
-                    }
-                    return const Center(child: Text("Error loading chart"));
-                  }),
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                      ),
+                      swapAnimationCurve: Curves.linear,
+                    );
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: 30,
+                      width: double.infinity,
+                      child: const CircularProgressIndicator(),
+                    );
+                  }
+                  return const Center(child: Text("Error loading chart"));
+                },
+              ),
             ),
             const SizedBox(
               height: 20,
