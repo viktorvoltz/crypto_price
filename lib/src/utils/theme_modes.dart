@@ -13,8 +13,14 @@ final darkTheme = ThemeData(
 
 final lightTheme = ThemeData(
   primarySwatch: Colors.grey,
-  primaryColor: Colors.white,
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: Colors.white,
+  ),
+  //primaryColor: Colors.white,
   brightness: Brightness.light,
+  textTheme: const TextTheme(
+    subtitle1: TextStyle(color: Colors.black)
+  ),
   backgroundColor: const Color(0xFFE5E5E5),
   accentColor: Colors.black,
   dividerColor: Colors.grey,
