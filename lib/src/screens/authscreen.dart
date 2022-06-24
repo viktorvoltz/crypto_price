@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
               height: 40,
               width: 200,
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-              color: Colors.black,
+              //color: Colors.black,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -33,7 +33,7 @@ class AuthScreen extends StatelessWidget {
                     },
                     child: const Text(
                       "Signin with Google",
-                      style: TextStyle(color: Colors.white),
+                      //style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
