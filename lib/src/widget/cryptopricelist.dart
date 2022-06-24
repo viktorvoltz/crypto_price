@@ -75,15 +75,21 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
                         !widget.snapshot!.data![widget.index!].isFavourited;
                   });
                 },
-                child: Container(
-                  width: double.infinity,
-                  child: widget.snapshot!.data![widget.index!].isFavourited
-                      ? const Icon(
-                          Icons.star,
-                        )
-                      : const Icon(
-                          Icons.star_border,
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: widget.snapshot!.data![widget.index!].isFavourited
+                          ? const Icon(
+                              Icons.star,
+                            )
+                          : const Icon(
+                              Icons.star_border,
+                            ),
+                    ),
+                    Text(widget.snapshot!.data![widget.index!].marketCapRank.toString())
+                  ],
                 ),
               ),
             ),
