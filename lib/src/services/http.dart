@@ -25,7 +25,7 @@ class CoinGeckoData {
       );
       print('loading from cache');
       // delete cache data after one minute of loading
-      Future.delayed(const Duration(minutes: 1), () async {
+      Future.delayed(const Duration(minutes: 2), () async {
         await file.delete();
       });
       return res;
