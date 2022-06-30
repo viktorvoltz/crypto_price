@@ -39,15 +39,15 @@ class BusyHandler extends ChangeNotifier {
         .whenComplete(() {
       _isbusy = false;
       notifyListeners();
-      if (_user != null) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              return const CryptoList();
-            },
-          ),
-        );
-      }
     });
+    if (_user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return const CryptoList();
+          },
+        ),
+      );
+    }
   }
 }
