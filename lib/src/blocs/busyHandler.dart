@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:coingecko/src/services/http.dart';
@@ -35,6 +37,7 @@ class BusyHandler extends ChangeNotifier {
   Future<void> bSigninWithGoogle(BuildContext context) async {
     _isbusy = true;
     notifyListeners();
+    try{
     _user = await Authentication.signInWithGoogle(context: context)
         .whenComplete(() {
       _isbusy = false;
@@ -52,6 +55,25 @@ class BusyHandler extends ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Sign In Process Interrupted. Try Again."),
+        ),
+      );
+    }
+    } on HttpException{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Internet Error. Try Again."),
+        ),
+      );
+    } on HandshakeException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Connection Interrupted. Try Again."),
+        ),
+      );
+    } catch (e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Internet Error."),
         ),
       );
     }
