@@ -48,6 +48,12 @@ class BusyHandler extends ChangeNotifier {
           },
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Sign In Process Interrupted. Try Again."),
+        ),
+      );
     }
   }
 }
