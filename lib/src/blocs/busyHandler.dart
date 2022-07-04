@@ -58,22 +58,10 @@ class BusyHandler extends ChangeNotifier {
         ),
       );
     }
-    } on HttpException{
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Internet Error. Try Again."),
-        ),
-      );
-    } on HandshakeException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Connection Interrupted. Try Again."),
-        ),
-      );
     } catch (e){
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Internet Error."),
+          content: Text("Internet Error. Try Again"),
         ),
       );
     }
