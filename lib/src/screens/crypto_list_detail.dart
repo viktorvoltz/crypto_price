@@ -1,11 +1,12 @@
 import 'dart:ui';
 
-import 'package:coingecko/src/model/chart_data.dart';
-import 'package:coingecko/src/services/http.dart';
-import 'package:coingecko/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:coingecko/src/model/coingeckoModel.dart';
+import 'package:coingecko/src/model/chart_data.dart';
+import 'package:coingecko/src/services/http.dart';
+import 'package:coingecko/src/utils/constants.dart';
+
 import 'package:fl_chart/fl_chart.dart';
 
 class CryptoDetail extends StatefulWidget {
