@@ -3,6 +3,7 @@ import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/crypto_list_detail.dart';
 import 'package:coingecko/src/utils/constants.dart';
+import 'package:coingecko/src/utils/favourite_check.dart';
 import 'package:coingecko/src/widget/price_change.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +21,8 @@ class CryptoPriceList extends StatefulWidget {
 }
 
 class _CryptoPriceListState extends State<CryptoPriceList> {
+  Favourite favourite = Favourite();
+
   @override
   void initState() {
     super.initState();
@@ -27,18 +30,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   }
 
   void checkValue() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var check = prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}');
-    if (prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
-            false ||
-        prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
-            null) {
-      widget.snapshot!.data![widget.index!].isFavourited = false;
-    }
-    if (prefs.getBool('fav${widget.snapshot!.data![widget.index!].id}') ==
-        true) {
-      widget.snapshot!.data![widget.index!].isFavourited = true;
-    }
+    await favourite.getFavourite(widget.snapshot!, widget.index!);
     setState(() {});
   }
 
@@ -55,24 +47,9 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
             SizedBox(
               width: 25,
               child: GestureDetector(
-                onTap: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                onTap: () {
                   setState(() {
-                    if (widget.snapshot!.data![widget.index!].isFavourited ==
-                        false) {
-                      prefs.setBool(
-                          "fav${widget.snapshot!.data![widget.index!].id}",
-                          true);
-                    }
-                    if (widget.snapshot!.data![widget.index!].isFavourited ==
-                        true) {
-                      prefs.setBool(
-                          "fav${widget.snapshot!.data![widget.index!].id}",
-                          false);
-                    }
-                    widget.snapshot!.data![widget.index!].isFavourited =
-                        !widget.snapshot!.data![widget.index!].isFavourited;
+                    favourite.setFavourite(widget.snapshot!, widget.index!);
                   });
                 },
                 child: Column(
