@@ -44,6 +44,11 @@ class BusyHandler extends ChangeNotifier {
       notifyListeners();
     });
     if (_user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Sign in successful."),
+        ),
+      );
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
