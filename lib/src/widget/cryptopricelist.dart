@@ -26,7 +26,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   @override
   void initState() {
     super.initState();
-    checkValue();
+    //checkValue();
   }
 
   void checkValue() async {
@@ -38,6 +38,7 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
   Widget build(BuildContext context) {
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     busyHandler.setList(widget.snapshot!.data!);
+    checkValue();
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
