@@ -8,7 +8,6 @@ import 'package:coingecko/src/widget/price_change.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CryptoPriceList extends StatefulWidget {
   final AsyncSnapshot<List<CoinGecko>>? snapshot;
@@ -23,12 +22,6 @@ class CryptoPriceList extends StatefulWidget {
 class _CryptoPriceListState extends State<CryptoPriceList> {
   Favourite favourite = Favourite();
 
-  @override
-  void initState() {
-    super.initState();
-    //checkValue();
-  }
-
   void checkValue() async {
     await favourite.getFavourite(widget.snapshot!, widget.index!);
     setState(() {});
@@ -36,9 +29,9 @@ class _CryptoPriceListState extends State<CryptoPriceList> {
 
   @override
   Widget build(BuildContext context) {
+    checkValue();
     BusyHandler busyHandler = Provider.of<BusyHandler>(context);
     busyHandler.setList(widget.snapshot!.data!);
-    checkValue();
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       leading: SizedBox(
