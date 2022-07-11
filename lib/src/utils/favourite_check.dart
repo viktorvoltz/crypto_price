@@ -7,6 +7,7 @@ class Favourite {
 
   Favourite();
 
+  /// Retrieve and display already starred coins 
   Future<void> getFavourite(AsyncSnapshot<List<CoinGecko>> snapshot, int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('fav${snapshot.data![index].id}') == false ||
@@ -18,6 +19,7 @@ class Favourite {
     }
   }
 
+  /// Unstar/Star a coin
   void setFavourite(AsyncSnapshot<List<CoinGecko>> snapshot, int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (snapshot.data![index].isFavourited == false) {
