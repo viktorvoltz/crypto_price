@@ -53,8 +53,8 @@ android {
         applicationId "com.chinonso.coingecko"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 3
-        versionName "1.0.1-hot-fix"
+        versionCode 4
+        versionName "1.0.2"
     }
 
     signingConfigs {
