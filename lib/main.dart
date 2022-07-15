@@ -17,7 +17,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: providers,
-      child: const Responsive(child: MyApp()),
+      child: const MyApp(),
     ),
   );
 }
@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
           theme: value.getTheme(),
           home: GoogleSignIn().currentUser == null &&
                   FirebaseAuth.instance.currentUser == null
-              ? const AuthScreen()
-              : const CryptoList(),
+              ? const Responsive(child: AuthScreen())
+              : const Responsive(child: CryptoList()),
         );
       },
     );
