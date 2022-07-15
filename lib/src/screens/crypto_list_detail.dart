@@ -6,6 +6,7 @@ import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/model/chart_data.dart';
 import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/utils/constants.dart';
+import 'package:coingecko/src/utils/screen_size.dart';
 
 import 'package:fl_chart/fl_chart.dart';
 
@@ -65,7 +66,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20),
-              height: 400,
+              height: 0.67.defaultHeight(),
               child: FutureBuilder<ChartData>(
                 future: CoinGeckoData.chartData(id: widget.detail!.id!),
                 builder: (context, snapshot) {
