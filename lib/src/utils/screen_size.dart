@@ -23,3 +23,20 @@ extension ScreenSize on num {
   double defaultHeight() => _screenHeight * this;
   double defaultWeight() => _screenWidth * this;
 }
+
+class Responsive extends StatelessWidget {
+  final Widget child;
+  final double? screenWidth, screenHeight;
+  const Responsive({
+    Key? key,
+    required this.child,
+    this.screenHeight,
+    this.screenWidth,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ScreenSize(0).init(context, width: screenWidth, height: screenHeight);
+    return child;
+  }
+}
