@@ -22,12 +22,6 @@ class CryptoPriceList extends StatefulWidget {
 class _CryptoPriceListState extends State<CryptoPriceList> {
   Favourite favourite = Favourite();
 
-  @override
-  void initState() {
-    super.initState();
-    checkValue();
-  }
-
   void checkValue() async {
     await favourite.getFavourite(widget.snapshot!, widget.index!);
     setState(() {});
