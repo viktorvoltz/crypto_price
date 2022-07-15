@@ -2,6 +2,7 @@ import 'package:coingecko/src/blocs/theme_provider.dart';
 import 'package:coingecko/src/screens/authscreen.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
 import 'package:coingecko/src/utils/providers.dart';
+import 'package:coingecko/src/utils/screen_size.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +17,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: providers,
-      child: const MyApp(),
+      child: const Responsive(child: MyApp()),
     ),
   );
 }
