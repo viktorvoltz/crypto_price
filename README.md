@@ -1,4 +1,4 @@
-# price list
+# Crypto Price
 Available on [Play Store](https://play.google.com/store/apps/details?id=com.chinonso.coingecko)
 
 ## light theme
