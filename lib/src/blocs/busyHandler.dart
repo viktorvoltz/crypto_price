@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:coingecko/src/model/coingeckoModel.dart';
 import 'package:coingecko/src/screens/cypto_list_screen.dart';
-import 'package:coingecko/src/services/http.dart';
 import 'package:coingecko/src/utils/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
