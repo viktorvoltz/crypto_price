@@ -1,7 +1,6 @@
 import 'package:coingecko/src/blocs/busyHandler.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../blocs/coingecko_bloc.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
